@@ -30,6 +30,9 @@ namespace :deploy do
     end
   end
 
-  after :published, 'deploy:npm_install'  # Run npm install after publishing new release
-  after :npm_install, 'deploy:build_react'  # Build React app after npm install
+  # Ensure npm_install runs before build_react
+  before 'deploy:build_react', 'deploy:npm_install'
+
+  # Ensure build_react runs after npm_install and publishing
+  after :published, 'deploy:build_react'
 end

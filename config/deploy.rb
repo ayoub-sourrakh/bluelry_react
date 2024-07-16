@@ -18,26 +18,35 @@ append :linked_dirs, 'node_modules', 'log', 'public/system', 'tmp/cache', 'tmp/p
 namespace :deploy do
     desc 'Install npm dependencies'
     task :npm_install do
-        on roles(:app) do
-            within release_path do
-                execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production'"
-            end
+      on roles(:app) do
+        within release_path do
+          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production'"
         end
+      end
     end
-    
-    desc 'Force reinstall react-scripts and build React app'
+  
+    desc 'Install react-scripts'
+    task :install_react_scripts do
+      on roles(:app) do
+        within release_path do
+          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install react-scripts@latest'"
+        end
+      end
+    end
+  
+    desc 'Build React app'
     task :build_react do
-        on roles(:app) do
-            within release_path do
-                # Assurez-vous que react-scripts est installé
-                execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install react-scripts@latest && npm run build'"
-            end
+      on roles(:app) do
+        within release_path do
+          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
         end
+      end
     end
-    
-    after :publishing, :build_react
-end
-
+  
+    before 'deploy:build_react', 'deploy:install_react_scripts'
+    after :publishing, 'deploy:build_react'
+  end
+  
 
 set :ssh_options, {
 forward_agent: true,

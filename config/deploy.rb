@@ -14,33 +14,32 @@ set :deploy_to, '/var/www/bluelry_react'
 
 # Configuration des tâches de déploiement
 namespace :deploy do
-    desc 'Install npm dependencies'
-    task :npm_install do
-      on roles(:app) do
-        within release_path do
-          # Wrap the command to ensure it runs in a login shell
-          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production'"
-        end
-      end
-    end
-    
-    desc 'Build React app'
-    task :build_react do
-      on roles(:app) do
-        within release_path do
-          # Wrap the command to ensure it runs in a login shell
-          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
-        end
+  desc 'Install npm dependencies'
+  task :npm_install do
+    on roles(:app) do
+      within release_path do
+        # Source nvm and use the desired Node.js version, then npm install
+        execute :bash, '-l -c', "source ~/.bashrc && nvm use #{fetch(:node_version)} && npm install --production"
       end
     end
   end
-
-# Custom SSH options
-set :ssh_options, {
-  forward_agent: true,
-  auth_methods: %w[publickey],
-  user: 'ubuntu'
-}
+  
+  desc 'Build React app'
+  task :build_react do
+    on roles(:app) do
+      within release_path do
+        # Source nvm and use the desired Node.js version, then npm run build
+        execute :bash, '-l -c', "source ~/.bashrc && nvm use #{fetch(:node_version)} && npm run build"
+      end
+    end
+  end
+  
+  # Ensure npm_install runs before build_react
+  before 'deploy:build_react', 'deploy:npm_install'
+  
+  # Hook build_react after deployment is finished
+  after :finished, 'deploy:build_react'
+end
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -63,6 +62,12 @@ set :ssh_options, {
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for local_user is ENV['USER']
+# set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5

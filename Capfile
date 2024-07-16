@@ -14,12 +14,8 @@ namespace :deploy do
   task :npm_install do
     on roles(:app) do
       within release_path do
-        # Load NVM
-        execute :source, '$HOME/.nvm/nvm.sh'
-        execute :source, '$HOME/.nvm/bash_completion'
-
-        # Install npm dependencies
-        execute :npm, 'install --production'
+        # Load NVM and install npm dependencies
+        execute :bash, '-lc', 'source $HOME/.nvm/nvm.sh && source $HOME/.nvm/bash_completion && npm install --production'
       end
     end
   end
@@ -28,12 +24,8 @@ namespace :deploy do
   task :build_react do
     on roles(:app) do
       within release_path do
-        # Load NVM
-        execute :source, '$HOME/.nvm/nvm.sh'
-        execute :source, '$HOME/.nvm/bash_completion'
-
-        # Build React app
-        execute :npm, 'run build'
+        # Load NVM and build React app
+        execute :bash, '-lc', 'source $HOME/.nvm/nvm.sh && source $HOME/.nvm/bash_completion && npm run build'
       end
     end
   end

@@ -20,15 +20,17 @@ namespace :deploy do
   task :npm_install do
     on roles(:app) do
       within release_path do
+        # Install production dependencies and explicitly install react-scripts
         execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production && npm install react-scripts@latest --save'"
       end
     end
   end
 
-  desc 'Log environment details'
+  desc 'Log environment details to debug path issues'
   task :log_env_details do
     on roles(:app) do
       within release_path do
+        # Log useful environment information to troubleshoot path issues
         execute :bash, "-l -c 'echo $PATH && which node && node -v && npm -v && which react-scripts'"
       end
     end
@@ -38,12 +40,13 @@ namespace :deploy do
   task :build_react do
     on roles(:app) do
       within release_path do
+        # Execute the React build script
         execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
       end
     end
   end
 
-  # Hook tasks in the correct order
+  # Sequence the tasks correctly to ensure they run in the proper order during deployment
   before 'deploy:publishing', 'deploy:npm_install'
   before 'deploy:build_react', 'deploy:log_env_details'
   after 'deploy:published', 'deploy:build_react'

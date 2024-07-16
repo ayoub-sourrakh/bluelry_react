@@ -13,14 +13,22 @@ set :deploy_to, '/var/www/bluelry_react'
 # Configuration des tâches de déploiement
 namespace :deploy do
     desc 'Install npm dependencies'
+    # task :npm_install do
+    #     on roles(:app) do
+    #         within release_path do
+    #             # Source nvm and use the desired Node.js version, then npm install
+    #             execute :bash, '-lc', 'source /home/ubuntu/.nvm/nvm.sh && nvm use && npm install --production'
+    #         end
+    #     end
+    # end
+
     task :npm_install do
         on roles(:app) do
-            within release_path do
-                # Source nvm and use the desired Node.js version, then npm install
-                execute :bash, '-lc', 'source /home/ubuntu/.nvm/nvm.sh && nvm use && npm install --production'
-            end
+          within release_path do
+            execute :bash, "-c 'source ~/.nvm/nvm.sh && nvm use && npm install --production'"
+          end
         end
-    end
+      end
     
     desc 'Build React app'
     task :build_react do

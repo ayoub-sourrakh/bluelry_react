@@ -18,8 +18,8 @@ namespace :deploy do
   task :npm_install do
     on roles(:app) do
       within release_path do
-        # Source nvm and use the desired Node.js version, then npm install
-        execute :bash, '-l -c', "source ~/.bashrc && nvm use #{fetch(:node_version)} && npm install --production"
+        # Ensure that nvm is sourced properly before using it
+        execute "source /home/ubuntu/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production"
       end
     end
   end
@@ -28,8 +28,8 @@ namespace :deploy do
   task :build_react do
     on roles(:app) do
       within release_path do
-        # Source nvm and use the desired Node.js version, then npm run build
-        execute :bash, '-l -c', "source ~/.bashrc && nvm use #{fetch(:node_version)} && npm run build"
+        # Ensure that nvm is sourced properly before using it
+        execute "source /home/ubuntu/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build"
       end
     end
   end
@@ -40,6 +40,15 @@ namespace :deploy do
   # Hook build_react after deployment is finished
   after :finished, 'deploy:build_react'
 end
+
+# Custom SSH options
+set :ssh_options, {
+  forward_agent: true,
+  auth_methods: %w[publickey],
+  user: 'ubuntu',
+  # Run commands in a login shell to ensure all user profile scripts are sourced
+  shell: '/bin/bash -l'
+}
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -62,12 +71,6 @@ end
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for local_user is ENV['USER']
-# set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5

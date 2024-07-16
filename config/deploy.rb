@@ -19,7 +19,7 @@ namespace :deploy do
     on roles(:app) do
       within release_path do
         # Source nvm and use the desired Node.js version, then npm install
-        execute :bash, '-lc', 'source ~/.bashrc && nvm use #{fetch(:node_version)} && npm install --production'
+        execute :bash, '-lc', "source ~/.bashrc && nvm use #{fetch(:node_version)} && npm install --production"
       end
     end
   end
@@ -29,7 +29,7 @@ namespace :deploy do
     on roles(:app) do
       within release_path do
         # Source nvm and use the desired Node.js version, then npm run build
-        execute :bash, '-lc', 'source ~/.bashrc && nvm use #{fetch(:node_version)} && npm run build'
+        execute :bash, '-lc', "source ~/.bashrc && nvm use #{fetch(:node_version)} && npm run build"
       end
     end
   end

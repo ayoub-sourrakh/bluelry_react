@@ -29,17 +29,15 @@ namespace :deploy do
   task :build_react do
     on roles(:app) do
       within release_path do
-        # Ensure that the command for building is correct
         execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
       end
     end
   end
 
-  # Ensuring tasks are executed in the right order
-  after 'deploy:npm_install', 'deploy:build_react'
+  # Correctly hook tasks
+  before 'deploy:publishing', 'deploy:npm_install'
+  after 'deploy:published', 'deploy:build_react'
 end
-
-after :publishing, 'deploy:npm_install'
 
 set :ssh_options, {
   forward_agent: true,

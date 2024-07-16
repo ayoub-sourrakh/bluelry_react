@@ -16,29 +16,27 @@ set :deploy_to, '/var/www/bluelry_react'
 append :linked_dirs, 'node_modules', 'log', 'public/system', 'tmp/cache', 'tmp/pids', 'tmp/sockets', 'vendor/bundle', 'public/build'
 
 namespace :deploy do
-  desc 'Install npm dependencies, check for existing node_modules'
-  task :npm_install do
-    on roles(:app) do
-      within release_path do
-        # Only install if node_modules does not exist or we force an install
-        execute :bash, "-l -c 'if [ ! -d node_modules ]; then source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production --silent --no-progress; fi'"
+    desc 'Install npm dependencies including react-scripts'
+    task :prepare_environment do
+      on roles(:app) do
+        within release_path do
+          # Installing dependencies with react-scripts explicitly
+          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production && npm install react-scripts@latest --save'"
+        end
       end
     end
-  end
-
-  desc 'Build React app'
-  task :build_react do
-    on roles(:app) do
-      within release_path do
-        # Ensure scripts are installed and build the project, use CI environment to reduce memory usage
-        execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && CI=true npm run build'"
+  
+    desc 'Build React app'
+    task :build_react do
+      on roles(:app) do
+        within release_path do
+          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
+        end
       end
     end
+  
+    before 'deploy:build_react', 'deploy:prepare_environment'
   end
-
-  before 'deploy:build_react', 'deploy:npm_install'
-  after :publishing, 'deploy:build_react'
-end
 
 set :ssh_options, {
   forward_agent: true,

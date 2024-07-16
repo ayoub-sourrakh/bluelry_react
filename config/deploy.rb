@@ -7,7 +7,6 @@ set :repo_url, "git@github.com:ayoub-sourrakh/bluelry_react.git"
 
 set :deploy_to, '/var/www/bluelry_react'
 
-install_plugin Capistrano::Npm
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

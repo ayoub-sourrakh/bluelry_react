@@ -4,7 +4,6 @@ lock "~> 3.19.1"
 set :application, "bluelry"
 set :repo_url, "git@github.com:ayoub-sourrakh/bluelry_react.git"
 
-server '35.180.205.58', user: 'ubuntu', roles: %w{app db web}
 
 set :deploy_to, '/var/www/bluelry_react'
 

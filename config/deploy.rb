@@ -16,11 +16,20 @@ set :deploy_to, '/var/www/bluelry_react'
 append :linked_dirs, 'node_modules', 'log', 'public/system', 'tmp/cache', 'tmp/pids', 'tmp/sockets', 'vendor/bundle', 'public/build'
 
 namespace :deploy do
-  desc 'Install npm dependencies'
+  desc 'Install npm dependencies and ensure react-scripts are available'
   task :npm_install do
     on roles(:app) do
       within release_path do
-        execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production'"
+        execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production && npm install react-scripts@latest --save'"
+      end
+    end
+  end
+
+  desc 'Log environment details'
+  task :log_env_details do
+    on roles(:app) do
+      within release_path do
+        execute :bash, "-l -c 'echo $PATH && which node && node -v && npm -v && which react-scripts'"
       end
     end
   end
@@ -34,8 +43,9 @@ namespace :deploy do
     end
   end
 
-  # Correctly hook tasks
+  # Hook tasks in the correct order
   before 'deploy:publishing', 'deploy:npm_install'
+  before 'deploy:build_react', 'deploy:log_env_details'
   after 'deploy:published', 'deploy:build_react'
 end
 

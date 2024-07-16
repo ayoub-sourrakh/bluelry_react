@@ -4,49 +4,42 @@ set :node_version, '14.21.3'
 
 set :application, "bluelry"
 set :repo_url, "git@github.com:ayoub-sourrakh/bluelry_react.git"
+
+# Setting the default environment to include the Node.js path
 set :default_env, {
-path: "/home/ubuntu/.nvm/versions/node/v#{fetch(:node_version)}/bin:$PATH"
+  path: "/home/ubuntu/.nvm/versions/node/v#{fetch(:node_version)}/bin:$PATH"
 }
 
 set :deploy_to, '/var/www/bluelry_react'
 
 # Configuration des tâches de déploiement
 namespace :deploy do
-    desc 'Install npm dependencies'
-    # task :npm_install do
-    #     on roles(:app) do
-    #         within release_path do
-    #             # Source nvm and use the desired Node.js version, then npm install
-    #             execute :bash, '-lc', 'source /home/ubuntu/.nvm/nvm.sh && nvm use && npm install --production'
-    #         end
-    #     end
-    # end
-
-    task :npm_install do
-        on roles(:app) do
-          within release_path do
-            execute :bash, "-c 'source ~/.nvm/nvm.sh && nvm use && npm install --production'"
-          end
-        end
+  desc 'Install npm dependencies'
+  task :npm_install do
+    on roles(:app) do
+      within release_path do
+        # Source nvm and use the desired Node.js version, then npm install
+        execute :bash, '-lc', 'source ~/.bashrc && nvm use && npm install --production'
       end
-    
-    desc 'Build React app'
-    task :build_react do
-        on roles(:app) do
-            within release_path do
-                # Source nvm and use the desired Node.js version, then npm run build
-                execute :bash, '-lc', 'source /home/ubuntu/.nvm/nvm.sh && nvm use && npm run build'
-            end
-        end
     end
-    
-    # Ensure npm_install runs before build_react
-    before 'deploy:build_react', 'deploy:npm_install'
-    
-    # Hook build_react after deployment is finished
-    after :finished, 'deploy:build_react'
+  end
+  
+  desc 'Build React app'
+  task :build_react do
+    on roles(:app) do
+      within release_path do
+        # Source nvm and use the desired Node.js version, then npm run build
+        execute :bash, '-lc', 'source ~/.bashrc && nvm use && npm run build'
+      end
+    end
+  end
+  
+  # Ensure npm_install runs before build_react
+  before 'deploy:build_react', 'deploy:npm_install'
+  
+  # Hook build_react after deployment is finished
+  after :finished, 'deploy:build_react'
 end
-
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

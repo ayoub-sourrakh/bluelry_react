@@ -14,7 +14,7 @@ namespace :deploy do
   task :npm_install do
     on roles(:app) do
       within release_path do
-        # Source nvm and use the desired Node.js version
+        # Source nvm and use the desired Node.js version, then npm install
         execute :bash, '-lc', 'source $HOME/.nvm/nvm.sh && nvm use && npm install --production'
       end
     end
@@ -24,7 +24,7 @@ namespace :deploy do
   task :build_react do
     on roles(:app) do
       within release_path do
-        # Source nvm and use the desired Node.js version
+        # Source nvm and use the desired Node.js version, then npm run build
         execute :bash, '-lc', 'source $HOME/.nvm/nvm.sh && nvm use && npm run build'
       end
     end

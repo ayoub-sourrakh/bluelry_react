@@ -31,7 +31,7 @@ namespace :deploy do
     on roles(:app) do
       within release_path do
         # Log useful environment information to troubleshoot path issues
-        execute :bash, "-l -c 'echo $PATH && which node && node -v && npm -v && which react-scripts'"
+        execute :bash, "-l -c 'echo $PATH && which node && node -v && npm -v && ls node_modules/.bin/'"
       end
     end
   end
@@ -40,13 +40,13 @@ namespace :deploy do
   task :build_react do
     on roles(:app) do
       within release_path do
-        # Execute the React build script
-        execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
+        # Use the locally installed react-scripts from node_modules to build the app
+        execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && ./node_modules/.bin/react-scripts build'"
       end
     end
   end
 
-  # Sequence the tasks correctly to ensure they run in the proper order during deployment
+  # Hook tasks in the correct order
   before 'deploy:publishing', 'deploy:npm_install'
   before 'deploy:build_react', 'deploy:log_env_details'
   after 'deploy:published', 'deploy:build_react'

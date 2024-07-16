@@ -16,27 +16,30 @@ set :deploy_to, '/var/www/bluelry_react'
 append :linked_dirs, 'node_modules', 'log', 'public/system', 'tmp/cache', 'tmp/pids', 'tmp/sockets', 'vendor/bundle', 'public/build'
 
 namespace :deploy do
-    desc 'Install npm dependencies including react-scripts'
-    task :prepare_environment do
-      on roles(:app) do
-        within release_path do
-          # Installing dependencies with react-scripts explicitly
-          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production && npm install react-scripts@latest --save'"
-        end
+  desc 'Install npm dependencies'
+  task :npm_install do
+    on roles(:app) do
+      within release_path do
+        execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production'"
       end
     end
-  
-    desc 'Build React app'
-    task :build_react do
-      on roles(:app) do
-        within release_path do
-          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
-        end
-      end
-    end
-  
-    before 'deploy:build_react', 'deploy:prepare_environment'
   end
+
+  desc 'Build React app'
+  task :build_react do
+    on roles(:app) do
+      within release_path do
+        # Ensure that the command for building is correct
+        execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
+      end
+    end
+  end
+
+  # Ensuring tasks are executed in the right order
+  after 'deploy:npm_install', 'deploy:build_react'
+end
+
+after :publishing, 'deploy:npm_install'
 
 set :ssh_options, {
   forward_agent: true,

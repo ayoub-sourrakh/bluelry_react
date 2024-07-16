@@ -14,40 +14,32 @@ set :deploy_to, '/var/www/bluelry_react'
 
 # Configuration des tâches de déploiement
 namespace :deploy do
-  desc 'Install npm dependencies'
-  task :npm_install do
-    on roles(:app) do
-      within release_path do
-        # Ensure that nvm is sourced properly before using it
-        execute "source /home/ubuntu/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production"
+    desc 'Install npm dependencies'
+    task :npm_install do
+      on roles(:app) do
+        within release_path do
+          # Wrap the command to ensure it runs in a login shell
+          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install --production'"
+        end
+      end
+    end
+    
+    desc 'Build React app'
+    task :build_react do
+      on roles(:app) do
+        within release_path do
+          # Wrap the command to ensure it runs in a login shell
+          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build'"
+        end
       end
     end
   end
-  
-  desc 'Build React app'
-  task :build_react do
-    on roles(:app) do
-      within release_path do
-        # Ensure that nvm is sourced properly before using it
-        execute "source /home/ubuntu/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm run build"
-      end
-    end
-  end
-  
-  # Ensure npm_install runs before build_react
-  before 'deploy:build_react', 'deploy:npm_install'
-  
-  # Hook build_react after deployment is finished
-  after :finished, 'deploy:build_react'
-end
 
 # Custom SSH options
 set :ssh_options, {
   forward_agent: true,
   auth_methods: %w[publickey],
-  user: 'ubuntu',
-  # Run commands in a login shell to ensure all user profile scripts are sourced
-  shell: '/bin/bash -l'
+  user: 'ubuntu'
 }
 
 # Default branch is :master

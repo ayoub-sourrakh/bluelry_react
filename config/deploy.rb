@@ -17,7 +17,7 @@ namespace :deploy do
         on roles(:app) do
             within release_path do
                 # Source nvm and use the desired Node.js version, then npm install
-                execute :bash, '-lc', 'source /home/ubuntu/.nvm/nvm.sh && nvm use && npm install --production'
+                execute :bash, '-lc', 'source /home/ubuntu/.nvm/nvm.sh && nvm use 14.21.3 && npm install --production'
             end
         end
     end
@@ -27,7 +27,7 @@ namespace :deploy do
         on roles(:app) do
             within release_path do
                 # Source nvm and use the desired Node.js version, then npm run build
-                execute :bash, '-lc', 'source /home/ubuntu/.nvm/nvm.sh && nvm use && npm run build'
+                execute :bash, '-lc', 'source /home/ubuntu/.nvm/nvm.sh && nvm use 14.21.3 && npm run build'
             end
         end
     end

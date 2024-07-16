@@ -1,24 +1,15 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.19.1"
+set :node_version, '14.21.3'
 
 set :application, "bluelry"
 set :repo_url, "git@github.com:ayoub-sourrakh/bluelry_react.git"
-
+set :default_env, {
+  path: "$HOME/.nvm/versions/node/v#{fetch(:node_version)}/bin:$PATH"
+}
 
 set :deploy_to, '/var/www/bluelry_react'
 
-set :default_env, {
-  'PATH' => "$HOME/.nvm/versions/node/v#{fetch(:node_version)}/bin:$PATH"
-}
-
-task :npm_install do
-  on roles(:app) do
-    within release_path do
-      execute :nvm, "use v#{fetch(:node_version)}"
-      execute :npm, "install --production"
-    end
-  end
-end
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

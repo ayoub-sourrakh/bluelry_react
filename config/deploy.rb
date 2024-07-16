@@ -25,15 +25,15 @@ namespace :deploy do
       end
     end
   
-    desc 'Install react-scripts'
-    task :install_react_scripts do
-      on roles(:app) do
-        within release_path do
-        #   execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install react-scripts@latest'"
-          execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install react-scripts@latest --prefer-offline --no-audit --progress=false && npm run build'"
-        end
-      end
-    end
+    # desc 'Install react-scripts'
+    # task :install_react_scripts do
+    #   on roles(:app) do
+    #     within release_path do
+    #     #   execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install react-scripts@latest'"
+    #       execute :bash, "-l -c 'source ~/.nvm/nvm.sh && nvm use #{fetch(:node_version)} && npm install react-scripts@latest --prefer-offline --no-audit --progress=false && npm run build'"
+    #     end
+    #   end
+    # end
   
     desc 'Build React app'
     task :build_react do

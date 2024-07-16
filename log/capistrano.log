@@ -423,3 +423,111 @@ mkdir: cannot create directory ‘/var/www/bluelry_react’: Permission denied
  DEBUG [5e5c2ec6] Command: cd /var/www/bluelry_react/releases/20240716143630 && /usr/bin/env bash -lc source $HOME/.nvm/nvm.sh && source $HOME/.nvm/bash_completion && npm install --production
  DEBUG [5e5c2ec6] 	/home/ubuntu/.nvm/nvm.sh: line 1: source: filename argument required
 source: usage: source filename [arguments]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2024-07-16 16:37:11 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [5ad837d3] Running /usr/bin/env mkdir -p /tmp as ubuntu@35.180.205.58
+ DEBUG [5ad837d3] Command: /usr/bin/env mkdir -p /tmp
+  INFO [5ad837d3] Finished in 0.392 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-477d4c257c31b972b5e8.sh 0.0%
+  INFO Uploading /tmp/git-ssh-477d4c257c31b972b5e8.sh 100.0%
+  INFO [05babc1c] Running /usr/bin/env chmod 700 /tmp/git-ssh-477d4c257c31b972b5e8.sh as ubuntu@35.180.205.58
+ DEBUG [05babc1c] Command: /usr/bin/env chmod 700 /tmp/git-ssh-477d4c257c31b972b5e8.sh
+  INFO [05babc1c] Finished in 0.078 seconds with exit status 0 (successful).
+  INFO [40b1b624] Running /usr/bin/env git ls-remote git@github.com:ayoub-sourrakh/bluelry_react.git HEAD as ubuntu@35.180.205.58
+ DEBUG [40b1b624] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-477d4c257c31b972b5e8.sh" ; /usr/bin/env git ls-remote git@github.com:ayoub-sourrakh/bluelry_react.git HEAD )
+  INFO ---------------------------------------------------------------------------
+  INFO START 2024-07-16 16:37:18 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [682f5937] Running /usr/bin/env mkdir -p /tmp as ubuntu@35.180.205.58
+ DEBUG [682f5937] Command: /usr/bin/env mkdir -p /tmp
+  INFO [682f5937] Finished in 0.367 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-98df1ffab380687754e3.sh 0.0%
+  INFO Uploading /tmp/git-ssh-98df1ffab380687754e3.sh 100.0%
+  INFO [d737b535] Running /usr/bin/env chmod 700 /tmp/git-ssh-98df1ffab380687754e3.sh as ubuntu@35.180.205.58
+ DEBUG [d737b535] Command: /usr/bin/env chmod 700 /tmp/git-ssh-98df1ffab380687754e3.sh
+  INFO [d737b535] Finished in 0.088 seconds with exit status 0 (successful).
+  INFO [5a7391ef] Running /usr/bin/env git ls-remote git@github.com:ayoub-sourrakh/bluelry_react.git HEAD as ubuntu@35.180.205.58
+ DEBUG [5a7391ef] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-98df1ffab380687754e3.sh" ; /usr/bin/env git ls-remote git@github.com:ayoub-sourrakh/bluelry_react.git HEAD )
+ DEBUG [5a7391ef] 	d4228488673d7027dc3a557bdc7c29d78fb9cfd1	HEAD
+  INFO [5a7391ef] Finished in 1.321 seconds with exit status 0 (successful).
+  INFO [e56b325c] Running /usr/bin/env mkdir -p /var/www/bluelry_react/shared /var/www/bluelry_react/releases as ubuntu@35.180.205.58
+ DEBUG [e56b325c] Command: /usr/bin/env mkdir -p /var/www/bluelry_react/shared /var/www/bluelry_react/releases
+  INFO [e56b325c] Finished in 0.035 seconds with exit status 0 (successful).
+ DEBUG [6fdb3c63] Running [ -f /var/www/bluelry_react/current/REVISION ] as ubuntu@35.180.205.58
+ DEBUG [6fdb3c63] Command: [ -f /var/www/bluelry_react/current/REVISION ]
+ DEBUG [6fdb3c63] Finished in 0.077 seconds with exit status 0 (successful).
+ DEBUG [47a88a1c] Running /usr/bin/env cat /var/www/bluelry_react/current/REVISION 2>/dev/null as ubuntu@35.180.205.58
+ DEBUG [47a88a1c] Command: /usr/bin/env cat /var/www/bluelry_react/current/REVISION 2>/dev/null
+ DEBUG [47a88a1c] 	842aefeb8f34b37e64c6b7f5b53ef60d9af5001d
+ DEBUG [47a88a1c] Finished in 0.081 seconds with exit status 0 (successful).
+ DEBUG [06af7c4f] Running [ -f /var/www/bluelry_react/current/REVISION_TIME ] as ubuntu@35.180.205.58
+ DEBUG [06af7c4f] Command: [ -f /var/www/bluelry_react/current/REVISION_TIME ]
+ DEBUG [06af7c4f] Finished in 0.085 seconds with exit status 0 (successful).
+ DEBUG [c8e0dcc6] Running /usr/bin/env cat /var/www/bluelry_react/current/REVISION_TIME 2>/dev/null as ubuntu@35.180.205.58
+ DEBUG [c8e0dcc6] Command: /usr/bin/env cat /var/www/bluelry_react/current/REVISION_TIME 2>/dev/null
+ DEBUG [c8e0dcc6] 	1721140581
+ DEBUG [c8e0dcc6] Finished in 0.080 seconds with exit status 0 (successful).
+ DEBUG [a9b66bf5] Running [ -f /var/www/bluelry_react/repo/HEAD ] as ubuntu@35.180.205.58
+ DEBUG [a9b66bf5] Command: [ -f /var/www/bluelry_react/repo/HEAD ]
+ DEBUG [a9b66bf5] Finished in 0.080 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/bluelry_react/repo
+ DEBUG [3f308dbe] Running if test ! -d /var/www/bluelry_react/repo; then echo "Directory does not exist '/var/www/bluelry_react/repo'" 1>&2; false; fi as ubuntu@35.180.205.58
+ DEBUG [3f308dbe] Command: if test ! -d /var/www/bluelry_react/repo; then echo "Directory does not exist '/var/www/bluelry_react/repo'" 1>&2; false; fi
+ DEBUG [3f308dbe] Finished in 0.078 seconds with exit status 0 (successful).
+  INFO [6af1a87b] Running /usr/bin/env git remote set-url origin git@github.com:ayoub-sourrakh/bluelry_react.git as ubuntu@35.180.205.58
+ DEBUG [6af1a87b] Command: cd /var/www/bluelry_react/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-98df1ffab380687754e3.sh" ; /usr/bin/env git remote set-url origin git@github.com:ayoub-sourrakh/bluelry_react.git )
+  INFO [6af1a87b] Finished in 0.082 seconds with exit status 0 (successful).
+  INFO [7f311f5a] Running /usr/bin/env git remote update --prune as ubuntu@35.180.205.58
+ DEBUG [7f311f5a] Command: cd /var/www/bluelry_react/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-98df1ffab380687754e3.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [7f311f5a] 	From github.com:ayoub-sourrakh/bluelry_react
+   842aefe..d422848  main       -> main
+  INFO [7f311f5a] Finished in 1.471 seconds with exit status 0 (successful).
+ DEBUG [efc751ae] Running if test ! -d /var/www/bluelry_react/repo; then echo "Directory does not exist '/var/www/bluelry_react/repo'" 1>&2; false; fi as ubuntu@35.180.205.58
+ DEBUG [efc751ae] Command: if test ! -d /var/www/bluelry_react/repo; then echo "Directory does not exist '/var/www/bluelry_react/repo'" 1>&2; false; fi
+ DEBUG [efc751ae] Finished in 0.038 seconds with exit status 0 (successful).
+  INFO [425e2216] Running /usr/bin/env mkdir -p /var/www/bluelry_react/releases/20240716143721 as ubuntu@35.180.205.58
+ DEBUG [425e2216] Command: cd /var/www/bluelry_react/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-98df1ffab380687754e3.sh" ; /usr/bin/env mkdir -p /var/www/bluelry_react/releases/20240716143721 )
+  INFO [425e2216] Finished in 0.079 seconds with exit status 0 (successful).
+  INFO [bfdd58fb] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/bluelry_react/releases/20240716143721 as ubuntu@35.180.205.58
+ DEBUG [bfdd58fb] Command: cd /var/www/bluelry_react/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-98df1ffab380687754e3.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/bluelry_react/releases/20240716143721 )
+  INFO [bfdd58fb] Finished in 0.088 seconds with exit status 0 (successful).
+ DEBUG [438d7520] Running if test ! -d /var/www/bluelry_react/repo; then echo "Directory does not exist '/var/www/bluelry_react/repo'" 1>&2; false; fi as ubuntu@35.180.205.58
+ DEBUG [438d7520] Command: if test ! -d /var/www/bluelry_react/repo; then echo "Directory does not exist '/var/www/bluelry_react/repo'" 1>&2; false; fi
+ DEBUG [438d7520] Finished in 0.080 seconds with exit status 0 (successful).
+ DEBUG [277c0612] Running /usr/bin/env git rev-list --max-count=1 main as ubuntu@35.180.205.58
+ DEBUG [277c0612] Command: cd /var/www/bluelry_react/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-98df1ffab380687754e3.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [277c0612] 	d4228488673d7027dc3a557bdc7c29d78fb9cfd1
+ DEBUG [277c0612] Finished in 0.085 seconds with exit status 0 (successful).
+ DEBUG [947b59fc] Running if test ! -d /var/www/bluelry_react/releases/20240716143721; then echo "Directory does not exist '/var/www/bluelry_react/releases/20240716143721'" 1>&2; false; fi as ubuntu@35.180.205.58
+ DEBUG [947b59fc] Command: if test ! -d /var/www/bluelry_react/releases/20240716143721; then echo "Directory does not exist '/var/www/bluelry_react/releases/20240716143721'" 1>&2; false; fi
+ DEBUG [947b59fc] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [95cc8497] Running /usr/bin/env echo "d4228488673d7027dc3a557bdc7c29d78fb9cfd1" > REVISION as ubuntu@35.180.205.58
+ DEBUG [95cc8497] Command: cd /var/www/bluelry_react/releases/20240716143721 && /usr/bin/env echo "d4228488673d7027dc3a557bdc7c29d78fb9cfd1" > REVISION
+  INFO [95cc8497] Finished in 0.082 seconds with exit status 0 (successful).
+ DEBUG [468a0362] Running if test ! -d /var/www/bluelry_react/repo; then echo "Directory does not exist '/var/www/bluelry_react/repo'" 1>&2; false; fi as ubuntu@35.180.205.58
+ DEBUG [468a0362] Command: if test ! -d /var/www/bluelry_react/repo; then echo "Directory does not exist '/var/www/bluelry_react/repo'" 1>&2; false; fi
+ DEBUG [468a0362] Finished in 0.076 seconds with exit status 0 (successful).
+ DEBUG [d413b938] Running /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" main as ubuntu@35.180.205.58
+ DEBUG [d413b938] Command: cd /var/www/bluelry_react/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-98df1ffab380687754e3.sh" ; /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" main )
+ DEBUG [d413b938] 	1721140629
+ DEBUG [d413b938] Finished in 0.082 seconds with exit status 0 (successful).
+ DEBUG [1afd3c55] Running if test ! -d /var/www/bluelry_react/releases/20240716143721; then echo "Directory does not exist '/var/www/bluelry_react/releases/20240716143721'" 1>&2; false; fi as ubuntu@35.180.205.58
+ DEBUG [1afd3c55] Command: if test ! -d /var/www/bluelry_react/releases/20240716143721; then echo "Directory does not exist '/var/www/bluelry_react/releases/20240716143721'" 1>&2; false; fi
+ DEBUG [1afd3c55] Finished in 0.082 seconds with exit status 0 (successful).
+  INFO [d14dc513] Running /usr/bin/env echo "1721140629" > REVISION_TIME as ubuntu@35.180.205.58
+ DEBUG [d14dc513] Command: cd /var/www/bluelry_react/releases/20240716143721 && /usr/bin/env echo "1721140629" > REVISION_TIME
+  INFO [d14dc513] Finished in 0.100 seconds with exit status 0 (successful).
+  INFO [fbc08d19] Running /usr/bin/env ln -s /var/www/bluelry_react/releases/20240716143721 /var/www/bluelry_react/releases/current as ubuntu@35.180.205.58
+ DEBUG [fbc08d19] Command: /usr/bin/env ln -s /var/www/bluelry_react/releases/20240716143721 /var/www/bluelry_react/releases/current
+  INFO [fbc08d19] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [3040e97f] Running /usr/bin/env mv /var/www/bluelry_react/releases/current /var/www/bluelry_react as ubuntu@35.180.205.58
+ DEBUG [3040e97f] Command: /usr/bin/env mv /var/www/bluelry_react/releases/current /var/www/bluelry_react
+  INFO [3040e97f] Finished in 0.079 seconds with exit status 0 (successful).
+ DEBUG [a47d96a8] Running if test ! -d /var/www/bluelry_react/releases/20240716143721; then echo "Directory does not exist '/var/www/bluelry_react/releases/20240716143721'" 1>&2; false; fi as ubuntu@35.180.205.58
+ DEBUG [a47d96a8] Command: if test ! -d /var/www/bluelry_react/releases/20240716143721; then echo "Directory does not exist '/var/www/bluelry_react/releases/20240716143721'" 1>&2; false; fi
+ DEBUG [a47d96a8] Finished in 0.079 seconds with exit status 0 (successful).
+  INFO [be1911e0] Running /usr/bin/env bash -lc source $HOME/.nvm/nvm.sh && npm install --production as ubuntu@35.180.205.58
+ DEBUG [be1911e0] Command: cd /var/www/bluelry_react/releases/20240716143721 && /usr/bin/env bash -lc source $HOME/.nvm/nvm.sh && npm install --production
+ DEBUG [be1911e0] 	/home/ubuntu/.nvm/nvm.sh: line 1: source: filename argument required
+source: usage: source filename [arguments]

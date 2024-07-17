@@ -18,7 +18,7 @@ const RegisterPage = () => {
     }
     try {
       // Envoyer les données d'inscription à votre API
-      const response = await fetch('http://localhost:8080/api/register', {
+      const response = await fetch('http://127.0.0.1/api/v1/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

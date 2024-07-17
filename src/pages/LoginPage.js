@@ -12,7 +12,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       // Envoyer les données de connexion à votre API
-      const response = await fetch('127.0.0.1:8080/api/', {
+      const response = await fetch('https://www.bluelry.com/api/v1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

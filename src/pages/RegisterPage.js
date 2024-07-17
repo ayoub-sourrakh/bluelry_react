@@ -18,7 +18,7 @@ const RegisterPage = () => {
     }
     try {
       // Envoyer les données d'inscription à votre API
-      const response = await fetch('http://localhost:8080/api/register', {
+      const response = await fetch('https://www.bluelry.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

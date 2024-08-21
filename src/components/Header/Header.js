@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext'; // Ajustez le chemin selon votre structure de fichiers
 
 const Header = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Vérification de la présence du token lors du chargement du composant
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    // Supprimer le token lors de la déconnexion
-    localStorage.removeItem('authToken');
-    setIsAuthenticated(false);
-  };
+  const { isAuthenticated, logout } = useContext(AuthContext);
 
   return (
     <Navbar bg="dark" variant="dark" fixed="top" style={{ height: '50px' }}>
@@ -30,7 +17,7 @@ const Header = () => {
         {isAuthenticated ? (
           <>
             <Nav.Link as={Link} to="/profile">Mon Profil</Nav.Link>
-            <Nav.Link as={Link} to="/" onClick={handleLogout}>Déconnexion</Nav.Link>
+            <Nav.Link as={Link} to="/" onClick={logout}>Déconnexion</Nav.Link>
           </>
         ) : (
           <>

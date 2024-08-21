@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext'; // Ajustez le chemin selon votre structure de fichiers
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,16 +27,10 @@ const LoginPage = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
         const token = response.headers.get('authorization');
-
-        // Store the JWT token in localStorage or sessionStorage
-        localStorage.setItem('authToken', token);
-
-        // Redirect the user to the dashboard or desired page after successful login
-        navigate('/dashboard'); // Replace '/dashboard' with your actual dashboard route
+        login(token); // Appelle la fonction login du contexte
+        navigate('/profile'); // Redirige vers le profil après la connexion
       } else {
-        // Display error message if the login fails
         setError('Adresse email ou mot de passe incorrect.');
       }
     } catch (error) {

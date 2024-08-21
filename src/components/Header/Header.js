@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../AuthContext'; // Ajustez le chemin selon votre structure de fichiers
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);

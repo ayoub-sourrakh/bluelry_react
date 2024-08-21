@@ -2,14 +2,15 @@ import React, { useContext } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import Logo from '../Logo/Logo';
 
 const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
 
   return (
-    <Navbar bg="dark" variant="dark" fixed="top" style={{ height: '50px' }}>
+    <Navbar bg="dark" variant="dark" fixed="top" style={{ height: '20%' }}>
       <Navbar.Brand as={Link} to="/" className="ms-3">
-        Bluelry
+        <Logo />
       </Navbar.Brand>
       <Nav className="ms-auto me-3">
         <Nav.Link as={Link} to="/catalogue">Catalogue</Nav.Link>

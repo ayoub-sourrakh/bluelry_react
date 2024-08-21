@@ -29,8 +29,9 @@ const LoginPage = () => {
       if (response.ok) {
         const token = response.headers.get('authorization');
         
-        if (token && token !== "null") {
-          login(token); // Save the token and update auth state
+        if (token && token.startsWith('Bearer ')) {
+          const jwtToken = token.split(' ')[1];  // Extract the JWT token part
+          login(jwtToken); // Store the token and update authentication state
           navigate('/profile'); // Redirect to profile after successful login
         } else {
           setError('Token not received or invalid. Please try again.');

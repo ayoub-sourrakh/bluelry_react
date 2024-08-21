@@ -1,28 +1,44 @@
-import React from 'react';
-import { Container, Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Logo from '../Logo/Logo';
-import catalogue from '../../assets/imgs/catalogue.png';
-import panier from '../../assets/imgs/panier.png';
-import connexion from '../../assets/imgs/connexion.png';
-import inscription from '../../assets/imgs/inscription.png';
 
 const Header = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Vérification de la présence du token lors du chargement du composant
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    // Supprimer le token lors de la déconnexion
+    localStorage.removeItem('authToken');
+    setIsAuthenticated(false);
+  };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-      <Container>
-        <Navbar.Brand as={Link} to="/"><Logo /></Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/catalogue"><img src={catalogue} alt='logo_bluelry' style={{ maxWidth: '100%', maxHeight: '100%' }} /></Nav.Link>
-            <Nav.Link as={Link} to="/cart"><img src={panier} alt='logo_bluelry' style={{ maxWidth: '100%', maxHeight: '100%' }} /></Nav.Link>
-            <Nav.Link as={Link} to="/login"><img src={connexion} alt='logo_bluelry' style={{ maxWidth: '100%', maxHeight: '100%' }} /></Nav.Link>
-            <Nav.Link as={Link} to="/register"><img src={inscription} alt='logo_bluelry' style={{ maxWidth: '100%', maxHeight: '100%' }} /></Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+    <Navbar bg="dark" variant="dark" fixed="top" style={{ height: '50px' }}>
+      <Navbar.Brand as={Link} to="/" className="ms-3">
+        Bluelry
+      </Navbar.Brand>
+      <Nav className="ms-auto me-3">
+        <Nav.Link as={Link} to="/catalogue">Catalogue</Nav.Link>
+        <Nav.Link as={Link} to="/cart">Panier</Nav.Link>
+        {isAuthenticated ? (
+          <>
+            <Nav.Link as={Link} to="/profile">Mon Profil</Nav.Link>
+            <Nav.Link as={Link} to="/" onClick={handleLogout}>Déconnexion</Nav.Link>
+          </>
+        ) : (
+          <>
+            <Nav.Link as={Link} to="/login">Connexion</Nav.Link>
+            <Nav.Link as={Link} to="/register">Inscription</Nav.Link>
+          </>
+        )}
+      </Nav>
     </Navbar>
   );
 };

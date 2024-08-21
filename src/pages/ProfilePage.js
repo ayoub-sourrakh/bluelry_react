@@ -22,9 +22,10 @@ const ProfilePage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setUserInfo(data.user); // Store user info in state
+          console.log('User data:', data.user);  // Debugging: Check if data is retrieved
+          setUserInfo(data.user); // Correctly setting the user information
         } else {
-          console.error('Failed to fetch user info');
+          console.error('Failed to fetch user info:', response.status);
         }
       } catch (error) {
         console.error('Error fetching user info:', error);
@@ -45,9 +46,10 @@ const ProfilePage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setOrders(data.orders);
+          console.log('Orders data:', data);  // Debugging: Check if orders are retrieved
+          setOrders(data.orders);  // Assuming `orders` is the correct key in the response
         } else {
-          console.error('Failed to fetch orders');
+          console.error('Failed to fetch orders:', response.status);
         }
       } catch (error) {
         console.error('Error fetching orders:', error);

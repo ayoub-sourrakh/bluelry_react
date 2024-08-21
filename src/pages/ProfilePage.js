@@ -16,7 +16,7 @@ const ProfilePage = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': token,
+            'Authorization': `Bearer ${token}`,
           },
         });
 
@@ -39,7 +39,7 @@ const ProfilePage = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': token,
+            'Authorization': `Bearer ${token}`,
           },
         });
 

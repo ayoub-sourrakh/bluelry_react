@@ -28,8 +28,14 @@ const LoginPage = () => {
 
       if (response.ok) {
         const token = response.headers.get('authorization');
-        login(token); // Appelle la fonction login du contexte
-        navigate('/profile'); // Redirige vers le profil après la connexion
+        
+        if (token && token !== "null") {
+          login(token); // Save the token and update auth state
+          navigate('/profile'); // Redirect to profile after successful login
+        } else {
+          setError('Token not received or invalid. Please try again.');
+          console.error('Invalid token received:', token);
+        }
       } else {
         setError('Adresse email ou mot de passe incorrect.');
       }

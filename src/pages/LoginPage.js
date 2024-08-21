@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext'; // Ajustez le chemin selon votre structure de fichiers
+import AuthContext from '../components/AuthContext'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');

@@ -22,7 +22,7 @@ const ProfilePage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setUserInfo(data.user);
+          setUserInfo(data.user); // Store user info in state
         } else {
           console.error('Failed to fetch user info');
         }

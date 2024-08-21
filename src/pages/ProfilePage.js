@@ -12,7 +12,7 @@ const ProfilePage = () => {
       const token = localStorage.getItem('authToken');
 
       try {
-        const response = await fetch('https://www.bluelry.com/api/v1/users/profile', {
+        const response = await fetch('https://www.bluelry.com/api/v1/users/me', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

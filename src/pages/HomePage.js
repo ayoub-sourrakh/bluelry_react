@@ -5,11 +5,6 @@ import ProductsByCategory from '../components/ProductsByCategory/ProductsByCateg
 import { Container } from 'react-bootstrap';
 
 const HomePage = () => {
-  
-  fetch('https://www.bluelry.com/api/v1/products/1') // replace with your Rails API's address
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
 
   return (
     <div>

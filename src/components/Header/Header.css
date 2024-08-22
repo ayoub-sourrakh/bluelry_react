@@ -5,9 +5,6 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.dropdown-menu-dark {
-    background-color: #004AAD;
-}
 
 @media (max-width: 991.20px) {
 
@@ -17,5 +14,6 @@
 
     .dropdown-menu-dark {
         margin-bottom: 1rem;
+        margin-right: 20%;
     }
 }

@@ -8,7 +8,7 @@ const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
 
   return (
-    <Navbar bg="dark" variant="dark" fixed="top" style={{ height: '20%' }}>
+    <Navbar bg="dark" variant="dark" sticky="top" style={{ height: '5rem' }}>
       <Navbar.Brand as={Link} to="/" className="ms-3">
         <Logo />
       </Navbar.Brand>

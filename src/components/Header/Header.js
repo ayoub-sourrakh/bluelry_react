@@ -6,7 +6,7 @@ import Logo from '../Logo/Logo';
 import './Header.css';
 
 const Header = () => {
-  const { isAuthenticated, user, logout } = useContext(AuthContext); // Assuming user data is provided here
+  const { isAuthenticated, logout, user } = useContext(AuthContext);
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '4rem' }}>
@@ -15,7 +15,7 @@ const Header = () => {
           <Logo />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarResponsive" />
-        <Navbar.Collapse id="navbarResponsive" className='navbar-collapse'>
+        <Navbar.Collapse id="navbarResponsive" className="navbar-collapse">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/catalogue">
               <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: 'white' }}>
@@ -27,10 +27,10 @@ const Header = () => {
                 <i className="fas fa-shopping-cart"></i> Panier
               </span>
             </Nav.Link>
-            {isAuthenticated ? (
+            {isAuthenticated && user ? (
               <Dropdown align="end">
                 <Dropdown.Toggle variant="dark" id="dropdown-basic" style={{ color: 'white', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <i className="fas fa-user"></i> {user?.firstName || 'User'} {/* Display the user's first name */}
+                  <i className="fas fa-user"></i> {user.first_name}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="dropdown-menu-dark">

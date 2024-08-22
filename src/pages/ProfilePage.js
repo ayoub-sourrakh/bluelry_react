@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup, Badge } from 'react-bootstrap';
 import { AuthContext } from '../contexts/AuthContext';
+import './ProfilePage.css'; // Import a custom CSS file for additional styling
 
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -22,8 +23,7 @@ const ProfilePage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('User data:', data.user);  // Debugging: Check if data is retrieved
-          setUserInfo(data.user); // Correctly setting the user information
+          setUserInfo(data.user); 
         } else {
           console.error('Failed to fetch user info:', response.status);
         }
@@ -46,8 +46,7 @@ const ProfilePage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('Orders data:', data);  // Debugging: Check if orders are retrieved
-          setOrders(data.orders);  // Assuming `orders` is the correct key in the response
+          setOrders(data.orders); 
         } else {
           console.error('Failed to fetch orders:', response.status);
         }
@@ -61,12 +60,13 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 profile-page">
       <Row>
         <Col md={4}>
-          <Card>
+          <Card className="profile-card shadow-sm">
             <Card.Body>
-              <Card.Title>Mon Profil</Card.Title>
+              <Card.Title className="text-center">Mon Profil</Card.Title>
+              <hr />
               {userInfo ? (
                 <>
                   <Card.Text><strong>Prénom:</strong> {userInfo.first_name}</Card.Text>
@@ -82,14 +82,17 @@ const ProfilePage = () => {
           </Card>
         </Col>
         <Col md={8}>
-          <h3>Mes Commandes</h3>
+          <h3 className="mb-4">Mes Commandes</h3>
           {orders.length > 0 ? (
-            <ListGroup>
+            <ListGroup className="order-list">
               {orders.map(order => (
-                <ListGroup.Item key={order.id}>
-                  <strong>Commande #{order.id}</strong> - {new Date(order.created_at).toLocaleDateString()}
-                  <div><strong>Total:</strong> {order.total} €</div>
-                  <div><strong>Status:</strong> {order.status}</div>
+                <ListGroup.Item key={order.id} className="order-item shadow-sm">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <strong>Commande #{order.id}</strong>
+                    <Badge bg={order.status === 'completed' ? 'success' : 'warning'}>{order.status}</Badge>
+                  </div>
+                  <div className="mt-2"><strong>Total:</strong> {order.total} €</div>
+                  <div><strong>Date:</strong> {new Date(order.created_at).toLocaleDateString()}</div>
                 </ListGroup.Item>
               ))}
             </ListGroup>

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Form, Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+import backgroundImage from '../assets/imgs/backgound_auth.jpg';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true); // State to toggle between login and register
@@ -87,9 +88,17 @@ const AuthPage = () => {
   };
 
   return (
-    <Container>
+    <Container
+      fluid
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh',
+      }}
+    >
       <Row className="justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
-        <Col xs={12} md={6} lg={4}>
+        <Col xs={12} md={6} lg={4} style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: '2rem', borderRadius: '10px' }}>
           <div className="text-center mb-4">
             <ToggleButtonGroup type="radio" name="auth-options" defaultValue={isLogin ? 1 : 2}>
               <ToggleButton

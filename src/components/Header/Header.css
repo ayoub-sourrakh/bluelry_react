@@ -2,7 +2,6 @@
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity));
     margin-left: 55%;
     padding-left: 5%;
-    padding-bottom: 2%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -11,6 +10,10 @@
 }
 
 @media (max-width: 991.20px) {
+
+    .navbar-collapse {
+        padding-bottom: 2%;
+    }
 
     .dropdown-menu-dark {
         margin-bottom: 1rem;

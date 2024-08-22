@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      // Fetch user data with the token if it exists
       fetchUserData(token);
       setIsAuthenticated(true);
     }
@@ -27,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        setUser(data.user); // Store the user data
+        setUser(data.user);
       } else {
         console.error('Failed to fetch user data.');
       }
@@ -39,13 +38,14 @@ export const AuthProvider = ({ children }) => {
   const login = async (token) => {
     localStorage.setItem('authToken', token);
     setIsAuthenticated(true);
-    await fetchUserData(token); // Fetch and store user data after login
+    await fetchUserData(token);
   };
 
   const logout = () => {
     localStorage.removeItem('authToken');
     setIsAuthenticated(false);
     setUser(null);
+    navigate('/login');
   };
 
   return (

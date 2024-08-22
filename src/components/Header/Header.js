@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import Logo from '../Logo/Logo';
 
 const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
+  const user = { firstName: 'John' }; // Replace this with the actual user data from context or state
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '5rem' }}>
@@ -27,18 +28,16 @@ const Header = () => {
               </span>
             </Nav.Link>
             {isAuthenticated ? (
-              <>
-                <Nav.Link as={Link} to="/profile">
-                  <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD', fontSize: '1.2rem' }}>
-                    <i className="fas fa-user"></i> Mon Profil
-                  </span>
-                </Nav.Link>
-                <Nav.Link as={Link} to="/" onClick={logout}>
-                  <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD', fontSize: '1.2rem' }}>
-                    <i className="fas fa-sign-out-alt"></i> Déconnexion
-                  </span>
-                </Nav.Link>
-              </>
+              <Dropdown align="end">
+                <Dropdown.Toggle variant="dark" id="dropdown-basic" style={{ color: '#004AAD', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <i className="fas fa-user"></i> {user.firstName}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/profile">Mon Profil</Dropdown.Item>
+                  <Dropdown.Item onClick={logout}>Déconnexion</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             ) : (
               <Nav.Link as={Link} to="/login">
                 <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD', fontSize: '1.2rem' }}>

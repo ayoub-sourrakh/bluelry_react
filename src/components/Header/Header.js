@@ -21,13 +21,21 @@ const Header = () => {
         </Nav.Link>
         {isAuthenticated ? (
           <>
-            <Nav.Link as={Link} to="/profile">Mon Profil</Nav.Link>
-            <Nav.Link as={Link} to="/" onClick={logout}>Déconnexion</Nav.Link>
+            <Nav.Link as={Link} to="/profile">
+              <span style={{display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD'}}> Mon Profil</span>
+            </Nav.Link>
+            <Nav.Link as={Link} to="/" onClick={logout}>
+              <span style={{display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD'}}> Déconnexion</span>
+            </Nav.Link>
           </>
         ) : (
           <>
-            <Nav.Link as={Link} to="/login">Connexion</Nav.Link>
-            <Nav.Link as={Link} to="/register">Inscription</Nav.Link>
+            <Nav.Link as={Link} to="/login">
+              <span style={{display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD'}}><i class="fa-solid fa-right-to-bracket"></i> Connexion</span>
+            </Nav.Link>
+            <Nav.Link as={Link} to="/register">
+              <span style={{display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD'}}><i class="fa-solid fa-address-card"></i> Inscription</span>
+            </Nav.Link>
           </>
         )}
       </Nav>

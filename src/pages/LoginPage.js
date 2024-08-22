@@ -27,6 +27,7 @@ const LoginPage = () => {
       });
 
       console.log('Response Headers:', [...response.headers.entries()]);
+      console.log(response);
 
       if (response.ok) {
         const token = response.headers.get('authorization');

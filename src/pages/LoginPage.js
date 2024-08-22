@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Form, Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
-import backgroundImage from '../assets/imgs/backgound_auth.jpg';
+import backgroundImage from '../assets/imgs/background_auth.jpg';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true); // State to toggle between login and register

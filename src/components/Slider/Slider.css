@@ -1,0 +1,50 @@
+.slider-image {
+    height: 500px; /* Set a fixed height for all images */
+    object-fit: cover; /* Ensures the image covers the entire area */
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
+    transition: transform 0.5s ease; /* Smooth transform transition */
+  }
+  
+  .slider-image:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  
+  /* Ensure the carousel and images are responsive */
+  @media (max-width: 768px) {
+    .slider-image {
+      height: 300px; /* Adjust height for smaller screens */
+    }
+  }
+  
+  /* Style for the carousel captions */
+  .carousel-caption {
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .slider-container {
+    position: relative;
+    margin-bottom: 20px; /* Adjust if needed to create space below the slider */
+  }
+  
+  .slider-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px; /* Same height as the header band */
+    background-color: #004AAD; /* Same color as the header band */
+  }
+  

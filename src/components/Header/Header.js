@@ -6,8 +6,7 @@ import Logo from '../Logo/Logo';
 import './Header.css';
 
 const Header = () => {
-  const { isAuthenticated, logout } = useContext(AuthContext);
-  const user = { firstName: 'John' }; // Replace with actual user data
+  const { isAuthenticated, user, logout } = useContext(AuthContext); // Assuming user data is provided here
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '4rem' }}>
@@ -31,7 +30,7 @@ const Header = () => {
             {isAuthenticated ? (
               <Dropdown align="end">
                 <Dropdown.Toggle variant="dark" id="dropdown-basic" style={{ color: 'white', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <i className="fas fa-user"></i> {user.firstName}
+                  <i className="fas fa-user"></i> {user?.firstName || 'User'} {/* Display the user's first name */}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="dropdown-menu-dark">

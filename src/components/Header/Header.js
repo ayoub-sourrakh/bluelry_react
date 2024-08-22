@@ -10,7 +10,7 @@ const Header = () => {
   const user = { firstName: 'John' }; // Replace with actual user data
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '5rem' }}>
+    <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '4rem' }}>
       <Container>
         <Navbar.Brand as={Link} to="/" className="ms-3">
           <Logo />

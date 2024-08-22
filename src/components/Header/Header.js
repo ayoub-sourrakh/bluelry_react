@@ -13,8 +13,12 @@ const Header = () => {
         <Logo />
       </Navbar.Brand>
       <Nav className="ms-auto me-3">
-        <Nav.Link as={Link} to="/catalogue">Catalogue</Nav.Link>
-        <Nav.Link as={Link} to="/cart">Panier</Nav.Link>
+        <Nav.Link as={Link} to="/catalogue">
+          <span style={{display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD'}}><i class="fas fa-book-open fa-large"></i> Catalogue</span>
+        </Nav.Link>
+        <Nav.Link as={Link} to="/cart">
+          <span style={{display: 'flex', gap: '5px', alignItems: 'center', color: '#004AAD'}}><i class="fas fa-shopping-cart"></i> Panier</span>
+        </Nav.Link>
         {isAuthenticated ? (
           <>
             <Nav.Link as={Link} to="/profile">Mon Profil</Nav.Link>

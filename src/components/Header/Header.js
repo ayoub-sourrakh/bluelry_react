@@ -6,7 +6,7 @@ import Logo from '../Logo/Logo';
 
 const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
-  const user = { firstName: 'John' }; // Replace this with the actual user data from context or state
+  const user = { firstName: 'John' }; // Replace with actual user data
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '5rem' }}>
@@ -33,7 +33,7 @@ const Header = () => {
                   <i className="fas fa-user"></i> {user.firstName}
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu className="dropdown-menu-dark">
                   <Dropdown.Item as={Link} to="/profile">Mon Profil</Dropdown.Item>
                   <Dropdown.Item onClick={logout}>Déconnexion</Dropdown.Item>
                 </Dropdown.Menu>

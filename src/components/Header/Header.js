@@ -1,12 +1,18 @@
 import React, { useContext } from 'react';
 import { Navbar, Nav, Container, Dropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import Logo from '../Logo/Logo';
 import './Header.css';
 
 const Header = () => {
   const { isAuthenticated, logout, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login'); // Redirect to login page after logout
+  };
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '4rem' }}>
@@ -35,7 +41,7 @@ const Header = () => {
 
                 <Dropdown.Menu className="dropdown-menu-dark">
                   <Dropdown.Item as={Link} to="/profile">Mon Profil</Dropdown.Item>
-                  <Dropdown.Item onClick={logout}>Déconnexion</Dropdown.Item>
+                  <Dropdown.Item onClick={handleLogout}>Déconnexion</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             ) : (

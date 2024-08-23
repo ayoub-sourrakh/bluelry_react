@@ -23,18 +23,18 @@ const Header = () => {
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/catalogue">
               <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#B5CAE6' }}>
-                <i className="fas fa-book-open"></i>
+                <i className="fas fa-book-open" style={{fontSize: '25px'}}></i>
               </span>
             </Nav.Link>
             <Nav.Link as={Link} to="/cart">
               <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#B5CAE6' }}>
-                <i className="fas fa-shopping-cart"></i>
+                <i className="fas fa-shopping-cart"  style={{fontSize: '25px'}}></i>
               </span>
             </Nav.Link>
             {isAuthenticated && user ? (
               <Dropdown align="end">
                 <Dropdown.Toggle variant="dark" id="dropdown-basic" style={{ color: '#B5CAE6', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <i className="fas fa-user"></i>
+                  <i className="fas fa-user"  style={{fontSize: '25px'}}></i>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
@@ -45,7 +45,7 @@ const Header = () => {
             ) : (
               <Nav.Link as={Link} to="/login">
                 <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#B5CAE6' }}>
-                  <i className="fas fa-sign-in-alt"></i>
+                  <i className="fas fa-sign-in-alt"  style={{fontSize: '25px'}}></i>
                 </span>
               </Nav.Link>
             )}

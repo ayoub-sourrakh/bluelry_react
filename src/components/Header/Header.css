@@ -33,6 +33,6 @@
 }
 
 .dropdown-item {
-    color: '#004aad';
-    font-weight: bold;
+    color: #004aad;
+    font-weight: 500 !important;
 }

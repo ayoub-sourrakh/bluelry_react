@@ -6,19 +6,15 @@
     border-bottom-right-radius: 10px;
 }
 
-@media (max-width: 991.20px) {
-    
-    .navbar-collapse {
-        padding-bottom: 2%;
-    }
-    
-    .dropdown-menu-dark {
-        margin-bottom: 1rem;
-    }
-}
-
 .navbar {
     position: relative;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row !important;
+    gap: 10px;
+    margin-right: 5%;
 }
 
 .navbar::after {

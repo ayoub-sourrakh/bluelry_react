@@ -1,35 +1,63 @@
-import React from 'react';
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Image, Button, Spinner } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import './ProductDetailsPage.css';
 
 function ProductDetailsPage() {
-  // Sample product data; replace with actual data or API call
-  const product = {
-    name: 'Elegant Gold Necklace',
-    description: 'A beautifully crafted gold necklace, perfect for any occasion. Made with 24K gold and a timeless design.',
-    price: '$299.99',
-    image: '', // Replace with actual image path
-  };
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`https://www.bluelry.com/api/v1/products/${id}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setProduct(data.data); // Assuming 'data.data' contains the product info
+          setLoading(false);
+        } else {
+          console.error('Failed to load product');
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <Container className="mt-5 text-center">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
+  }
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 product-details-page">
       <Row>
         <Col md={6}>
-          <Image src={product.image} alt={product.name} fluid />
+          <Image src={product?.image || "https://bluelrybucket.s3.eu-west-3.amazonaws.com/product_img_" + id + ".jpg"} alt={product?.name} fluid className="product-image" />
         </Col>
         <Col md={6}>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <h4 className="text-muted">Price: {product.price}</h4>
-          <Button variant="primary" size="lg" className="mt-3">
+          <h2 className="product-name">{product?.name}</h2>
+          <p className="product-description">{product?.description}</p>
+          <h4 className="text-muted product-price">Price: ${product?.price.toFixed(2)}</h4>
+          <Button variant="primary" size="lg" className="mt-3 add-to-cart-btn">
             Add to Cart
           </Button>
-        </Col>
-      </Row>
-      {/* Optional: Add related products or reviews section below */}
-      <Row className="mt-5">
-        <Col>
-          <h4>Related Products</h4>
-          {/* You can map over a list of related products here */}
         </Col>
       </Row>
     </Container>

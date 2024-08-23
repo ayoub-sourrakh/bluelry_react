@@ -23,16 +23,22 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 4px; /* Adjust the height of the band as needed */
-    background-color: #004AAD; /* The color of the band */
+    height: 4px;
+    background-color: #004AAD;
 }
 
 .navbar-nav .dropdown-menu {
     position: absolute !important;
     background-color: #B5CAE6;
+    box-shadow: 10px 5px 5px rgb(42, 41, 41);
 }
 
 .dropdown-item {
     color: #004aad !important;
     font-weight: 500 !important;
+}
+
+.dropdown-item :hover {
+    background-color: #004aad !important;
+    color: #B5CAE6 !important;
 }

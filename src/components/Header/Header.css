@@ -29,10 +29,10 @@
 
 .navbar-nav .dropdown-menu {
     position: absolute !important;
-    background-color: '#B5CAE6';
+    background-color: #B5CAE6;
 }
 
 .dropdown-item {
-    color: #004aad;
+    color: #004aad !important;
     font-weight: 500 !important;
 }

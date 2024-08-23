@@ -5,12 +5,14 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      fetchUserData(token);
-      setIsAuthenticated(true);
+      fetchUserData(token).then(() => setLoading(false));
+    } else {
+      setLoading(false); // Set loading to false if no token is found
     }
   }, []);
 
@@ -27,28 +29,32 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setUser(data.user);
+        setIsAuthenticated(true);
       } else {
         console.error('Failed to fetch user data.');
+        setIsAuthenticated(false);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
+      setIsAuthenticated(false);
     }
   };
 
   const login = async (token) => {
     localStorage.setItem('authToken', token);
-    setIsAuthenticated(true);
     await fetchUserData(token);
+    setLoading(false); // Set loading to false after user data is fetched
   };
 
   const logout = () => {
     localStorage.removeItem('authToken');
     setIsAuthenticated(false);
     setUser(null);
+    setLoading(false); // Ensure loading is false after logout
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

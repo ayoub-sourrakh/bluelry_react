@@ -30,7 +30,7 @@
 .navbar-nav .dropdown-menu {
     position: absolute !important;
     background-color: #B5CAE6;
-    box-shadow: 10px 5px 5px rgb(42, 41, 41);
+    box-shadow: 5px 5px 7px rgb(33 37 41 / 19%);
 }
 
 .dropdown-item {
@@ -39,6 +39,11 @@
 }
 
 .dropdown-item :hover {
-    background-color: #004aad !important;
+    background-color: #004aad;
     color: #B5CAE6 !important;
+}
+
+.dropdown-item:active {
+    background-color: #B5CAE6;
+    color: #004aad !important;
 }

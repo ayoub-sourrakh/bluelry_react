@@ -37,7 +37,7 @@ const Header = () => {
                   <i className="fas fa-user"></i>
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu className="dropdown-menu-dark">
+                <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/profile">Profil</Dropdown.Item>
                   <Dropdown.Item onClick={handleLogout}>Déconnexion</Dropdown.Item>
                 </Dropdown.Menu>

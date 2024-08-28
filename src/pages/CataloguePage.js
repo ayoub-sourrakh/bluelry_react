@@ -13,14 +13,13 @@ const CataloguePage = () => {
         const response = await fetch('https://www.bluelry.com/api/v1/products', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         });
 
         if (response.ok) {
           const data = await response.json();
-          setProducts(data.data); // Assuming 'data.data' contains the array of products
+          setProducts(data.data);
         } else {
           console.error('Failed to load products');
         }

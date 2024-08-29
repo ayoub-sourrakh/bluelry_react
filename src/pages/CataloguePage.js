@@ -9,11 +9,9 @@ const CataloguePage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const token = localStorage.getItem('authToken');
         const response = await fetch('https://www.bluelry.com/api/v1/products', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         });

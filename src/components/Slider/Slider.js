@@ -14,9 +14,6 @@ const Slider = () => (
           src={slider_image1}
           alt="First promo"
         />
-        <Carousel.Caption>
-          {/* Add caption if needed */}
-        </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
@@ -24,9 +21,6 @@ const Slider = () => (
           src={slider_image2}
           alt="Second promo"
         />
-        <Carousel.Caption>
-          {/* Add caption if needed */}
-        </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
@@ -34,9 +28,6 @@ const Slider = () => (
           src={slider_image3}
           alt="Third promo"
         />
-        <Carousel.Caption>
-          {/* Add caption if needed */}
-        </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
   </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import ProductCard from '../components/ProductCard/ProductCard';
 import './CataloguePage.css';
 
@@ -21,10 +21,10 @@ const CataloguePage = () => {
           const data = await response.json();
           setProducts(data.data);
         } else {
-          console.error('Failed to load products');
+          console.error('Échec du chargement des produits');
         }
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Erreur lors de la récupération des produits:', error);
       } finally {
         setLoading(false);
       }
@@ -42,17 +42,17 @@ const CataloguePage = () => {
   }
 
   return (
-    <Container className="my-3">
-      <h1>Catalogue</h1>
+    <Container className="my-3 catalogue-container">
+      <h1 className="text-center">Notre Catalogue</h1>
       <Row>
         {products.length > 0 ? (
           products.map(product => (
-            <Col sm={12} md={6} lg={4} key={product.id}>
+            <Col sm={12} md={6} lg={4} key={product.id} className="product-col">
               <ProductCard product={product} />
             </Col>
           ))
         ) : (
-          <p>Aucun produit disponible.</p>
+          <p className="text-center">Aucun produit disponible.</p>
         )}
       </Row>
     </Container>

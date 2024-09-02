@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => (
       </div>
       <Card.Body>
         <Card.Title>{product.name}</Card.Title>
-        <Card.Text>Price: ${product.price.toFixed(2)}</Card.Text>
+        <Card.Text>Prix: €{product.price.toFixed(2)}</Card.Text>
       </Card.Body>
     </Link>
   </Card>

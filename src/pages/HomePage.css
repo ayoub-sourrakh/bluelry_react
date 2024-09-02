@@ -1,0 +1,86 @@
+.homepage {
+    background-color: #f5f9fc; /* Light blue-ish background */
+  }
+  
+  .intro-section {
+    background-color: #e6f2fb; /* Softer blue for the intro section */
+    padding: 3rem 0;
+  }
+  
+  .intro-title {
+    font-size: 2.5rem;
+    color: #004080; /* Deep blue color for the title */
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-out;
+  }
+  
+  .intro-text {
+    font-size: 1.25rem;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 0;
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .cta-section {
+    background-color: #004080; /* Deep blue for the CTA section */
+    color: #ffffff;
+    padding: 2rem 0;
+  }
+  
+  .cta-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .cta-text {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .cta-button {
+    background-color: #0073e6;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1.25rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Animation keyframes */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

@@ -1,0 +1,21 @@
+.featured-products-slider .carousel-item {
+    position: relative;
+  }
+  
+  .product-image {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carousel-caption {
+    background-color: rgba(0, 0, 50, 0.6);
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+  
+  .carousel-caption h3,
+  .carousel-caption p {
+    margin: 0;
+    color: #fff;
+  }
+  

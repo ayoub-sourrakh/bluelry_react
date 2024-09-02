@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Image, Button, Spinner, Alert } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import './ProductDetailsPage.css';
+import RandomProductsCarousel from '../components/RandomProductsCarousel/RandomProductsCarousel';
 
 function ProductDetailsPage() {
   const { id } = useParams();
@@ -93,18 +94,19 @@ function ProductDetailsPage() {
           <div className="product-details-wrapper">
             <h2 className="product-name">{product?.name}</h2>
             <p className="product-description">{product?.description}</p>
-            <h4 className="text-muted product-price">Price: ${product?.price.toFixed(2)}</h4>
+            <h4 className="text-muted product-price">Prix: €{product?.price.toFixed(2)}</h4>
             <Button
               variant="primary"
               size="lg"
               className="mt-3 add-to-cart-btn"
               onClick={handleAddToCart}
             >
-              Add to Cart
+              Ajouter au panier
             </Button>
           </div>
         </Col>
       </Row>
+      <RandomProductsCarousel />
     </Container>
   );
 }

@@ -17,6 +17,7 @@ import OrderSuccessPage from './pages/OrderSuccessPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import CookieConsent from './components/CookieConsent/CookieConsent';
 
 // Load Stripe with your publishable key
 const stripePromise = loadStripe('pk_test_51PuaGIATsinV8eeEVA3BFa8EmiKaK2Cvz4Of1gm1Sybj9CfOa3tf6mEkFk7viEKlrLFHVKiEYfwibv63QTmCEJeu00Ttghs80Q');
@@ -25,6 +26,7 @@ function App() {
     return (
         <Router>
             <div className="site">
+                <CookieConsent />
                 <Header />
                 <Routes>
                     <Route path="/" element={<HomePage />} />

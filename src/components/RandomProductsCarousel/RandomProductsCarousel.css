@@ -1,0 +1,35 @@
+.random-products-carousel {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  .product-carousel-img {
+    max-height: 250px;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .carousel-caption h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #34495e;
+  }
+  
+  .carousel-caption p {
+    font-size: 1rem;
+    color: #2980b9;
+  }
+  
+  .carousel-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .carousel-item a:hover .product-carousel-img {
+    filter: brightness(0.9);
+    transform: scale(1.05);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  

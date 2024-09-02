@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => (
       <div className="product-img-wrapper">
         <Card.Img
           variant="top"
-          src={`https://bluelrybucket.s3.eu-west-3.amazonaws.com/product_img_${product.id}.jpg`}
+          src={`https://bluelrybucket.s3.eu-west-3.amazonaws.com/product_img_${product.id}.png`}
           alt={product.name}
           className="product-img"
         />

@@ -82,7 +82,7 @@ function ProductDetailsPage() {
         <Col md={6}>
           <div className="product-image-wrapper">
             <Image
-              src={product?.image || `https://bluelrybucket.s3.eu-west-3.amazonaws.com/product_img_${id}.jpg`}
+              src={product?.image || `https://bluelrybucket.s3.eu-west-3.amazonaws.com/product_img_${id}.png`}
               alt={product?.name}
               fluid
               className="product-image"

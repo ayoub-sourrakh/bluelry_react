@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col, Card, ListGroup, Badge } from 'react-bootstrap';
 import { AuthContext } from '../contexts/AuthContext';
-import './ProfilePage.css'; // Import a custom CSS file for additional styling
+import './ProfilePage.css';
 
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -23,7 +23,7 @@ const ProfilePage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setUserInfo(data.user); 
+          setUserInfo(data.user);
         } else {
           console.error('Failed to fetch user info:', response.status);
         }
@@ -46,7 +46,7 @@ const ProfilePage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setOrders(data.orders); 
+          setOrders(data.data); // Correctly map the orders data
         } else {
           console.error('Failed to fetch orders:', response.status);
         }
@@ -91,7 +91,7 @@ const ProfilePage = () => {
                     <strong>Commande #{order.id}</strong>
                     <Badge bg={order.status === 'completed' ? 'success' : 'warning'}>{order.status}</Badge>
                   </div>
-                  <div className="mt-2"><strong>Total:</strong> {order.total} €</div>
+                  <div className="mt-2"><strong>Total:</strong> {order.total_price} €</div>
                   <div><strong>Date:</strong> {new Date(order.created_at).toLocaleDateString()}</div>
                 </ListGroup.Item>
               ))}

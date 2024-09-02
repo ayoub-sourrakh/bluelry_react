@@ -18,6 +18,11 @@ import OrderHistoryPage from './pages/OrderHistoryPage';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CookieConsent from './components/CookieConsent/CookieConsent';
+import TermsOfServicePage from './pages/TermsOfServicePage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import CookiePolicy from './pages/CookiePolicy';
+import LegalNotice from './pages/LegalNotice';
 
 // Load Stripe with your publishable key
 const stripePromise = loadStripe('pk_test_51PuaGIATsinV8eeEVA3BFa8EmiKaK2Cvz4Of1gm1Sybj9CfOa3tf6mEkFk7viEKlrLFHVKiEYfwibv63QTmCEJeu00Ttghs80Q');
@@ -26,6 +31,7 @@ function App() {
     return (
         <Router>
             <div className="site">
+                <ScrollToTop />
                 <CookieConsent />
                 <Header />
                 <Routes>
@@ -36,6 +42,10 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/terms" element={<TermsOfServicePage />} />
+                    <Route path="/privacy" element={<PrivacyPolicy />} />
+                    <Route path="/cookies" element={<CookiePolicy />} />
+                    <Route path="/legal" element={<LegalNotice />} />
                     <Route 
                         path="/checkout" 
                         element={

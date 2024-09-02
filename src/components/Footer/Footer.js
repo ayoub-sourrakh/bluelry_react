@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import './Footer.css';
+import ReloadableLink from '../ReloadableLink/ReloadableLink';
+
 
 const Footer = () => (
   <footer className="footer mt-auto py-5 bg-dark text-light">
@@ -15,10 +16,10 @@ const Footer = () => (
         <Col md={3} className="text-center mb-3">
           <h5>Mentions légales</h5>
           <ul className="list-unstyled">
-            <li><Link to="/terms" className="text-light">Conditions d'utilisation</Link></li>
-            <li><Link to="/privacy" className="text-light">Politique de confidentialité</Link></li>
-            <li><Link to="/cookies" className="text-light">Politique de cookies</Link></li>
-            <li><Link to="/legal" className="text-light">Mentions légales</Link></li>
+            <li><ReloadableLink  to="/terms" className="text-light">Conditions d'utilisation</ReloadableLink ></li>
+            <li><ReloadableLink  to="/privacy" className="text-light">Politique de confidentialité</ReloadableLink ></li>
+            <li><ReloadableLink  to="/cookies" className="text-light">Politique de cookies</ReloadableLink ></li>
+            <li><ReloadableLink  to="/legal" className="text-light">Mentions légales</ReloadableLink ></li>
           </ul>
         </Col>
         <Col md={3} className="text-center mb-3">

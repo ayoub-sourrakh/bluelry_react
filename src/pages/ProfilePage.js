@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Card, ListGroup, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup, Badge, Button } from 'react-bootstrap';
 import { AuthContext } from '../contexts/AuthContext';
 import './ProfilePage.css';
+import { FaUserCircle } from 'react-icons/fa';
 
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -46,7 +47,7 @@ const ProfilePage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setOrders(data.data); // Correctly map the orders data
+          setOrders(data.data);
         } else {
           console.error('Failed to fetch orders:', response.status);
         }
@@ -63,10 +64,11 @@ const ProfilePage = () => {
     <Container className="mt-5 profile-page">
       <Row>
         <Col md={4}>
-          <Card className="profile-card shadow-sm">
-            <Card.Body>
-              <Card.Title className="text-center">Mon Profil</Card.Title>
-              <hr />
+          <Card className="profile-card shadow-lg">
+            <Card.Body className="text-center">
+              <FaUserCircle className="profile-icon" /> {/* Icône de bonhomme */}
+              <Card.Title className="text-center mt-3">Mon Profil</Card.Title>
+              <hr className="profile-divider" />
               {userInfo ? (
                 <>
                   <Card.Text><strong>Prénom:</strong> {userInfo.first_name}</Card.Text>
@@ -74,6 +76,7 @@ const ProfilePage = () => {
                   <Card.Text><strong>Email:</strong> {userInfo.email}</Card.Text>
                   <Card.Text><strong>Date de naissance:</strong> {userInfo.date_of_birth}</Card.Text>
                   <Card.Text><strong>Date de création du compte:</strong> {new Date(userInfo.created_at).toLocaleDateString()}</Card.Text>
+                  <Button variant="outline-danger" className="mt-3" onClick={logout}>Déconnexion</Button> {/* Bouton rouge */}
                 </>
               ) : (
                 <p>Chargement des informations utilisateur...</p>
@@ -82,14 +85,14 @@ const ProfilePage = () => {
           </Card>
         </Col>
         <Col md={8}>
-          <h3 className="mb-4">Mes Commandes</h3>
+          <h3 className="mb-4 text-primary-custom">Mes Commandes</h3> {/* Titre en bleu personnalisé */}
           {orders.length > 0 ? (
             <ListGroup className="order-list">
               {orders.map(order => (
                 <ListGroup.Item key={order.id} className="order-item shadow-sm">
                   <div className="d-flex justify-content-between align-items-center">
                     <strong>Commande #{order.id}</strong>
-                    <Badge bg={order.status === 'completed' ? 'success' : 'warning'}>{order.status}</Badge>
+                    <Badge bg={order.status === 'completed' ? 'primary-custom' : 'warning'}>{order.status}</Badge>
                   </div>
                   <div className="mt-2"><strong>Total:</strong> {order.total_price} €</div>
                   <div><strong>Date:</strong> {new Date(order.created_at).toLocaleDateString()}</div>

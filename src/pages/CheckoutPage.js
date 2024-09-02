@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+
+// Load Stripe outside of a component render to avoid recreating the Stripe object on every render.
+const stripePromise = loadStripe('pk_test_51PuaGIATsinV8eeEVA3BFa8EmiKaK2Cvz4Of1gm1Sybj9CfOa3tf6mEkFk7viEKlrLFHVKiEYfwibv63QTmCEJeu00Ttghs80Q');
 
 const CheckoutPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -17,6 +22,8 @@ const CheckoutPage = () => {
   });
   const [error, setError] = useState(null);
 
+  const stripe = useStripe();
+  const elements = useElements();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,43 +65,92 @@ const CheckoutPage = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.address || !formData.city || !formData.postalCode || !formData.country) {
       setError('Veuillez remplir tous les champs requis.');
       return;
     }
-
+  
     try {
-      const response = await fetch('https://www.bluelry.com/api/v1/orders', {
+      // Créer un PaymentIntent en appelant votre API Rails
+      const response = await fetch('https://www.bluelry.com/api/v1/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
         },
         body: JSON.stringify({
-          status: 'en cours',
-          shipping_address: `${formData.address}, ${formData.city}, ${formData.postalCode}, ${formData.country}`,
-          order_items_attributes: cartItems.map(item => ({
-            product_id: item.product.id,
-            quantity: item.quantity,
-            price: item.product.price,
-          })),
+          amount: totalAmount * 100, // Stripe attend le montant en centimes
         }),
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      const orderData = await response.json();
-
-      // Navigate to a success or order summary page
-      navigate('/order-success', { state: { order: orderData.data } });
+  
+      const data = await response.json();
+      const clientSecret = data.client_secret;
+  
+      if (!clientSecret) {
+        throw new Error('Missing client_secret in response');
+      }
+  
+      // Confirmer le paiement avec le client_secret reçu du backend
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            name: `${formData.firstName} ${formData.lastName}`,
+            email: formData.email,
+            address: {
+              line1: formData.address,
+              city: formData.city,
+              postal_code: formData.postalCode,
+              country: 'FR', // Utilisez le code du pays ISO 3166-1 alpha-2 pour la France
+            },
+          },
+        },
+      });
+  
+      if (result.error) {
+        setError(result.error.message);
+      } else {
+        if (result.paymentIntent.status === 'succeeded') {
+          // Après le paiement réussi, créez la commande dans votre système
+          const orderResponse = await fetch('https://www.bluelry.com/api/v1/orders', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            },
+            body: JSON.stringify({
+              status: 'en cours',
+              shipping_address: `${formData.address}, ${formData.city}, ${formData.postalCode}, FR`,
+              order_items_attributes: cartItems.map(item => ({
+                product_id: item.product.id,
+                quantity: item.quantity,
+                price: item.product.price,
+              })),
+            }),
+          });
+  
+          if (!orderResponse.ok) {
+            throw new Error(`HTTP error! status: ${orderResponse.status}`);
+          }
+  
+          const orderData = await orderResponse.json();
+  
+          // Rediriger vers une page de succès ou de résumé de commande
+          navigate('/order-success', { state: { order: orderData.data } });
+        }
+      }
     } catch (error) {
-      console.error('Failed to create order:', error);
+      console.error('Failed to handle payment:', error);
       setError('Erreur lors de la création de la commande');
     }
   };
+  
+  
 
   if (loading) {
     return (
@@ -206,6 +262,13 @@ const CheckoutPage = () => {
             </Form.Group>
           </Col>
         </Row>
+
+        {/* Stripe Card Element */}
+        <Form.Group controlId="formCardElement" className="mt-4">
+          <Form.Label>Détails de la carte</Form.Label>
+          <CardElement />
+        </Form.Group>
+
         <Button variant="primary" type="submit" className="mt-4 w-100">
           Continuer vers le paiement
         </Button>

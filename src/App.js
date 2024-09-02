@@ -14,7 +14,12 @@ import ProfilePage from './pages/ProfilePage';
 import CheckoutPage from './pages/CheckoutPage';
 import PaymentPage from './pages/PaymentPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
-import OrderHistoryPage from './pages/OrderHistoryPage ';
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+// Load Stripe with your publishable key
+const stripePromise = loadStripe('pk_test_51PuaGIATsinV8eeEVA3BFa8EmiKaK2Cvz4Of1gm1Sybj9CfOa3tf6mEkFk7viEKlrLFHVKiEYfwibv63QTmCEJeu00Ttghs80Q');
 
 function App() {
     return (
@@ -29,8 +34,22 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/checkout" element={<CheckoutPage />} />
-                    <Route path="/payment" element={<PaymentPage />} />
+                    <Route 
+                        path="/checkout" 
+                        element={
+                            <Elements stripe={stripePromise}>
+                                <CheckoutPage />
+                            </Elements>
+                        } 
+                    />
+                    <Route 
+                        path="/payment" 
+                        element={
+                            <Elements stripe={stripePromise}>
+                                <PaymentPage />
+                            </Elements>
+                        } 
+                    />
                     <Route path="/order-success" element={<OrderSuccessPage />} />
                     <Route path="/orders" element={<OrderHistoryPage />} />
                 </Routes>

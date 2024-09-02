@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import ProductCard from '../components/ProductCard/ProductCard';
+import './CataloguePage.css';
 
 const CataloguePage = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,6 @@ const CataloguePage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const token = localStorage.getItem('authToken');
         const response = await fetch('https://www.bluelry.com/api/v1/products', {
           method: 'GET',
           headers: {
@@ -52,7 +52,7 @@ const CataloguePage = () => {
             </Col>
           ))
         ) : (
-          <p>No products available.</p>
+          <p>Aucun produit disponible.</p>
         )}
       </Row>
     </Container>

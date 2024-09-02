@@ -11,6 +11,10 @@ import './App.css';
 import Header from './components/Header/Header';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
+import CheckoutPage from './pages/CheckoutPage';
+import PaymentPage from './pages/PaymentPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
+import OrderHistoryPage from './pages/OrderHistoryPage ';
 
 function App() {
     return (
@@ -25,6 +29,10 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="/payment" element={<PaymentPage />} />
+                    <Route path="/order-success" element={<OrderSuccessPage />} />
+                    <Route path="/orders" element={<OrderHistoryPage />} />
                 </Routes>
                 <Footer />
             </div>

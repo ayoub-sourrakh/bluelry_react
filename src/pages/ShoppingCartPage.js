@@ -107,9 +107,9 @@ const ShoppingCartPage = () => {
               {cartItems.map(item => (
                 <tr key={item.id}>
                   <td>{item.product?.name || 'Produit non disponible'}</td>
-                  <td>${item.product?.price ? item.product.price.toFixed(2) : 'N/A'}</td>
+                  <td>€{item.product?.price ? item.product.price.toFixed(2) : 'N/A'}</td>
                   <td>{item.quantity}</td>
-                  <td>${item.product?.price ? (item.product.price * item.quantity).toFixed(2) : '0.00'}</td>
+                  <td>€{item.product?.price ? (item.product.price * item.quantity).toFixed(2) : '0.00'}</td>
                   <td>
                     <Button
                       variant="danger"
@@ -124,7 +124,7 @@ const ShoppingCartPage = () => {
             </tbody>
           </Table>
           <div className="d-flex justify-content-end">
-            <h4>Total: ${getTotalPrice()}</h4>
+            <h4>Total: €{getTotalPrice()}</h4>
           </div>
           <Button
             variant="primary"

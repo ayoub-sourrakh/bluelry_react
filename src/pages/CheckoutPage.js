@@ -106,7 +106,7 @@ const CheckoutPage = () => {
               line1: formData.address,
               city: formData.city,
               postal_code: formData.postalCode,
-              country: 'FR', // Utilisez le code du pays ISO 3166-1 alpha-2 pour la France
+              country: 'FR',
             },
           },
         },
@@ -116,7 +116,6 @@ const CheckoutPage = () => {
         setError(result.error.message);
       } else {
         if (result.paymentIntent.status === 'succeeded') {
-          // Après le paiement réussi, créez la commande dans votre système
           const orderResponse = await fetch('https://www.bluelry.com/api/v1/orders', {
             method: 'POST',
             headers: {

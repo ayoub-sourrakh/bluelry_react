@@ -76,7 +76,6 @@ const ProfilePage = () => {
                   <Card.Text><strong>Email:</strong> {userInfo.email}</Card.Text>
                   <Card.Text><strong>Date de naissance:</strong> {userInfo.date_of_birth}</Card.Text>
                   <Card.Text><strong>Date de création du compte:</strong> {new Date(userInfo.created_at).toLocaleDateString()}</Card.Text>
-                  <Button variant="outline-danger" className="mt-3" onClick={logout}>Déconnexion</Button> {/* Bouton rouge */}
                 </>
               ) : (
                 <p>Chargement des informations utilisateur...</p>

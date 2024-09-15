@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Card, ListGroup, Badge, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup, Badge } from 'react-bootstrap';
 import { AuthContext } from '../contexts/AuthContext';
 import './ProfilePage.css';
 import { FaUserCircle } from 'react-icons/fa';

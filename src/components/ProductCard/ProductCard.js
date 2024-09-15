@@ -15,8 +15,8 @@ const ProductCard = ({ product }) => (
         />
       </div>
       <Card.Body>
-        <Card.Title>{product.name}</Card.Title>
-        <Card.Text>Prix: €{product.price.toFixed(2)}</Card.Text>
+        <Card.Title style={{"color": "#2460ca"}}>{product.name}</Card.Title>
+        <Card.Text>Prix: {product.price.toFixed(2)}€</Card.Text>
       </Card.Body>
     </Link>
   </Card>

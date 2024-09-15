@@ -46,12 +46,25 @@ export const AuthProvider = ({ children }) => {
     setLoading(false); // Set loading to false after user data is fetched
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await fetch('https://www.bluelry.com/api/v1/users/sign_out', {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error);
+    }
+    
     localStorage.removeItem('authToken');
     setIsAuthenticated(false);
     setUser(null);
-    setLoading(false); // Ensure loading is false after logout
+    setLoading(false);
   };
+  
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, loading, login, logout }}>

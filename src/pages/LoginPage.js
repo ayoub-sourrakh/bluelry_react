@@ -13,6 +13,7 @@ const AuthPage = () => {
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState(''); // Nouvel état pour le message de succès
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
@@ -40,6 +41,7 @@ const AuthPage = () => {
           if (token && token.startsWith('Bearer ')) {
             const jwtToken = token.split(' ')[1]; // Extract the JWT token part
             login(jwtToken); // Store the token and update authentication state
+            setError(''); // Clear error on successful login
             navigate('/profile'); // Redirect to profile after successful login
           } else {
             setError('Token not received or invalid. Please try again.');
@@ -76,10 +78,20 @@ const AuthPage = () => {
         });
 
         if (response.ok) {
-          navigate('/login');
+          setError(''); // Clear error after successful registration
+          setSuccessMessage('Inscription réussie ! Vous allez être redirigé vers la page de connexion.'); // Message de succès
+          
+          setTimeout(() => {
+            setIsLogin(true);
+            setSuccessMessage('');
+          }, 1500);
         } else {
           const errorData = await response.json();
-          setError(errorData.message || "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+          if (errorData.message && errorData.message.includes('Email has already been taken')) {
+            setError('Cet email est déjà utilisé. Veuillez en essayer un autre.');
+          } else {
+            setError(errorData.message || "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+          }
         }
       } catch (error) {
         setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
@@ -122,6 +134,7 @@ const AuthPage = () => {
             </ToggleButtonGroup>
           </div>
           {error && <div className="alert alert-danger text-center">{error}</div>}
+          {successMessage && <div className="alert alert-success text-center">{successMessage}</div>} {/* Affiche le message de succès */}
           <Form onSubmit={handleSubmit}>
             {!isLogin && (
               <>

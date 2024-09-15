@@ -31,6 +31,7 @@
     position: absolute !important;
     background-color: #B5CAE6;
     box-shadow: 5px 5px 7px rgb(33 37 41 / 19%);
+    border: 0;
 }
 
 .dropdown-item {

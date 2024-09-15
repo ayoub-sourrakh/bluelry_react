@@ -61,7 +61,7 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <Container className="mt-5 profile-page">
+    <Container className="mt-5 profile-page" style={{"marginBottom": "50px"}}>
       <Row>
         <Col md={4}>
           <Card className="profile-card shadow-lg">

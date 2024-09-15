@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Spinner, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Spinner, Alert, Table, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -149,8 +149,6 @@ const CheckoutPage = () => {
     }
   };
   
-  
-
   if (loading) {
     return (
       <Container className="my-5 text-center">
@@ -160,120 +158,139 @@ const CheckoutPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Informations de livraison</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <Form onSubmit={handleFormSubmit}>
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="formFirstName">
-              <Form.Label>Prénom</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Entrez votre prénom"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="formLastName">
-              <Form.Label>Nom</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Entrez votre nom"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Entrez votre email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="formAddress">
-              <Form.Label>Adresse</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Entrez votre adresse"
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="formCity">
-              <Form.Label>Ville</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Entrez votre ville"
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={3}>
-            <Form.Group controlId="formPostalCode">
-              <Form.Label>Code postal</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Entrez votre code postal"
-                name="postalCode"
-                value={formData.postalCode}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={3}>
-            <Form.Group controlId="formCountry">
-              <Form.Label>Pays</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Entrez votre pays"
-                name="country"
-                value={formData.country}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+    <Container className="mt-5" style={{"marginBottom" : "50px"}}>
+      <Row>
+        <Col md={8}>
+          <h2>Votre Panier</h2>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map(item => (
+                <tr key={item.product.id}>
+                  <td>{item.product.name}</td>
+                  <td>{item.quantity}</td>
+                  <td>{(item.product.price * item.quantity).toFixed(2)} €</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <h4>Total à payer: {totalAmount.toFixed(2)} €</h4>
+        </Col>
 
-        {/* Stripe Card Element */}
-        <Form.Group controlId="formCardElement" className="mt-4">
-          <Form.Label>Détails de la carte</Form.Label>
-          <CardElement />
-        </Form.Group>
+        <Col md={4}>
+          <Card>
+            <Card.Body>
+              <h2>Paiement et Adresse</h2>
+              {error && <Alert variant="danger">{error}</Alert>}
+              <Form onSubmit={handleFormSubmit}>
+                <Form.Group controlId="formFirstName" className="mb-3">
+                  <Form.Label>Prénom</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Entrez votre prénom"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group controlId="formLastName" className="mb-3">
+                  <Form.Label>Nom</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Entrez votre nom"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group controlId="formEmail" className="mb-3">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Entrez votre email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
 
-        <Button variant="primary" type="submit" className="mt-4 w-100">
-          Continuer vers le paiement
-        </Button>
-      </Form>
+                {/* Adresse */}
+                <Form.Group controlId="formAddress" className="mb-3">
+                  <Form.Label>Adresse</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Entrez votre adresse"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group controlId="formCity" className="mb-3">
+                  <Form.Label>Ville</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Entrez votre ville"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group controlId="formPostalCode" className="mb-3">
+                  <Form.Label>Code Postal</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Entrez votre code postal"
+                    name="postalCode"
+                    value={formData.postalCode}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group controlId="formCountry" className="mb-3">
+                  <Form.Label>Pays</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Entrez votre pays"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
+
+                {/* Stripe Card Element */}
+                <Form.Group controlId="formCardElement" className="mb-3">
+                  <Form.Label>Informations de la carte</Form.Label>
+                  <CardElement />
+                </Form.Group>
+
+                <Button variant="primary" type="submit" className="w-100">
+                  Payer {totalAmount.toFixed(2)} €
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
 };
 
-export default CheckoutPage;
+const StripeWrapper = () => (
+  <Elements stripe={stripePromise}>
+    <CheckoutPage />
+  </Elements>
+);
+
+export default StripeWrapper;

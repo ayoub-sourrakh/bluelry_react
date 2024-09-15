@@ -43,7 +43,7 @@ const CataloguePage = () => {
 
   return (
     <Container className="my-3 catalogue-container">
-      <h1 className="text-center">Notre Catalogue</h1>
+      <h1 className="text-center" style={{margin: "50px"}}>Notre Collection</h1>
       <Row>
         {products.length > 0 ? (
           products.map(product => (

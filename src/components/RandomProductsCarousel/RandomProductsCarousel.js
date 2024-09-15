@@ -56,8 +56,8 @@ const RandomProductsCarousel = () => {
                 alt={product.name}
               />
               <Carousel.Caption>
-                <h4>{product.name}</h4>
-                <p>{product.price.toFixed(2)} €</p>
+                <h4 style={{color: "white"}}>{product.name}</h4>
+                <p style={{color: "lightBlue"}}>{product.price.toFixed(2)} €</p>
               </Carousel.Caption>
             </Link>
           </Carousel.Item>

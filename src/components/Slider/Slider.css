@@ -1,5 +1,5 @@
 .slider-image {
-    height: 500px; /* Set a fixed height for all images */
+    height: 610px; /* Set a fixed height for all images */
     object-fit: cover; /* Ensures the image covers the entire area */
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a shadow effect */

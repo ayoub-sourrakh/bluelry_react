@@ -6,7 +6,7 @@ import './CataloguePage.css';
 const CataloguePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -16,7 +16,7 @@ const CataloguePage = () => {
             'Content-Type': 'application/json',
           },
         });
-
+        
         if (response.ok) {
           const data = await response.json();
           setProducts(data.data);
@@ -29,32 +29,35 @@ const CataloguePage = () => {
         setLoading(false);
       }
     };
-
+    
     fetchProducts();
   }, []);
-
+  
   if (loading) {
     return (
       <Container className="my-5 text-center">
-        <Spinner animation="border" variant="primary" />
+      <Spinner animation="border" variant="primary" />
       </Container>
     );
   }
-
+  
   return (
     <Container className="my-3 catalogue-container">
-      <h1 className="text-center" style={{margin: "50px"}}>Notre Collection</h1>
-      <Row>
-        {products.length > 0 ? (
-          products.map(product => (
-            <Col sm={12} md={6} lg={4} key={product.id} className="product-col">
-              <ProductCard product={product} />
-            </Col>
-          ))
-        ) : (
-          <p className="text-center">Aucun produit disponible.</p>
-        )}
-      </Row>
+    <h1 className="text-center" style={{margin: "50px"}}>Notre Collection</h1>
+    <Row>
+    {products.length > 0 ? (
+      // Trier les produits par nom avant de les mapper
+      products
+      .sort((a, b) => a.name.localeCompare(b.name)) // Tri par ordre alphabétique du nom
+      .map(product => (
+        <Col sm={12} md={6} lg={4} key={product.id} className="product-col">
+        <ProductCard product={product} />
+        </Col>
+      ))
+    ) : (
+      <p className="text-center">Aucun produit disponible.</p>
+    )}
+    </Row>
     </Container>
   );
 };

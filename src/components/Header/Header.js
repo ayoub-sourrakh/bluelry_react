@@ -15,30 +15,30 @@ const Header = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '4rem' }}>
+    <Navbar bg="dark" variant="dark" expand="lg" sticky="top" style={{ height: '8rem' }}>
       <Container>
         <Navbar.Brand as={Link} to="/" className="ms-3">
           <Logo />
         </Navbar.Brand>
-        <Nav className="ms-auto">
+        <Nav className="ms-auto" style={{"display": "flex", "gap" : "25px"}}>
           <Nav.Link as={Link} to="/catalogue">
-            <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#B5CAE6' }}>
-              <i className="fas fa-book-open" style={{ fontSize: '25px' }}></i>
+            <span style={{color: '#B5CAE6' }}>
+              <i className="fas fa-book-open" style={{ fontSize: '35px' }}></i>
             </span>
           </Nav.Link>
           <Nav.Link as={Link} to="/cart">
-            <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#B5CAE6' }}>
-              <i className="fas fa-shopping-cart" style={{ fontSize: '25px' }}></i>
+            <span style={{color: '#B5CAE6' }}>
+              <i className="fas fa-shopping-cart" style={{ fontSize: '35px' }}></i>
             </span>
           </Nav.Link>
           {loading ? (
-            <Spinner animation="border" role="status" variant="light" style={{ width: '25px', height: '25px' }}>
+            <Spinner animation="border" role="status" variant="light" style={{ width: '35px', height: '35px' }}>
               <span className="visually-hidden">Loading...</span>
             </Spinner>
           ) : isAuthenticated && user ? (
             <Dropdown align="end">
               <Dropdown.Toggle variant="dark" id="dropdown-basic" style={{ color: '#B5CAE6', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <i className="fas fa-user" style={{ fontSize: '25px' }}></i>
+                <i className="fas fa-user" style={{ fontSize: '35px' }}></i>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
@@ -48,8 +48,8 @@ const Header = () => {
             </Dropdown>
           ) : (
             <Nav.Link as={Link} to="/login">
-              <span style={{ display: 'flex', gap: '5px', alignItems: 'center', color: '#B5CAE6' }}>
-                <i className="fas fa-sign-in-alt" style={{ fontSize: '25px' }}></i>
+              <span style={{color: '#B5CAE6' }}>
+                <i className="fas fa-sign-in-alt" style={{ fontSize: '35px' }}></i>
               </span>
             </Nav.Link>
           )}

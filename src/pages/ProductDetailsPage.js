@@ -94,9 +94,9 @@ function ProductDetailsPage() {
         </Col>
         <Col md={6}>
           <div className="product-details-wrapper">
-            <h2 className="product-name" style={{color : "#2460ca"}}>{product?.name}</h2>
+            <h2 className="product-name">{product?.name}</h2>
             <p className="product-description">{product?.description}</p>
-            <h4 className="product-price" style={{fontWeight: "700"}}>Prix: {product?.price.toFixed(2)}€</h4>
+            <h4 className="product-price">{product?.price.toFixed(2)}€</h4>
             <Button
               variant="primary"
               size="lg"

@@ -13,7 +13,7 @@
   /* Ensure the carousel and images are responsive */
   @media (max-width: 768px) {
     .slider-image {
-      height: 300px; /* Adjust height for smaller screens */
+      height: 545px; /* Adjust height for smaller screens */
     }
   }
   

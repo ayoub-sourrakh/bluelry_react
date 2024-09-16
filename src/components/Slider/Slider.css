@@ -19,7 +19,7 @@
   
   /* Style for the carousel captions */
   .carousel-caption {
-    animation: fadeInUp 1s ease-in-out;
+    animation: fadeInUp 2s ease-in-out;
   }
   
   @keyframes fadeInUp {

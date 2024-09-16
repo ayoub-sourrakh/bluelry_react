@@ -13,7 +13,6 @@
 .navbar-nav {
     display: flex;
     flex-direction: row !important;
-    gap: 15px;
     margin-right: 5%;
 }
 

@@ -20,7 +20,7 @@ const Header = () => {
         <Navbar.Brand as={Link} to="/" className="ms-3">
           <Logo />
         </Navbar.Brand>
-        <Nav className="ms-auto" style={{"display": "flex", "gap" : "25px"}}>
+        <Nav className="ms-auto" style={{"display": "flex", "gap" : "10px"}}>
           <Nav.Link as={Link} to="/catalogue">
             <span style={{color: '#B5CAE6' }}>
               <i className="fas fa-book-open" style={{ fontSize: '35px' }}></i>

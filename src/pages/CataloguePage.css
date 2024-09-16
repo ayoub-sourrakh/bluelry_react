@@ -30,3 +30,32 @@
     transform: scale(1.1);
   }
   
+  .catalogue-container {
+    padding: 20px;
+  }
+  
+  .product-col {
+    margin-bottom: 30px;
+  }
+  
+  .form-control {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+  
+  button.me-2 {
+    margin-right: 10px;
+  }
+  
+  h1 {
+    font-weight: bold;
+  }
+  

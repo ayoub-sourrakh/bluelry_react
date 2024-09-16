@@ -87,10 +87,10 @@ const AuthPage = () => {
           }, 1500);
         } else {
           const errorData = await response.json();
-          if (errorData.message && errorData.message.includes('Email has already been taken')) {
-            setError('Cet email est déjà utilisé. Veuillez en essayer un autre.');
+          if (errorData.errors && errorData.errors.includes('Email has already been taken')) {
+            setError('Cet email est déjà utilisé. Veuillez vous connecter.');
           } else {
-            setError(errorData.message || "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+            setError(errorData.errors || "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
           }
         }
       } catch (error) {

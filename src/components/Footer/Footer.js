@@ -42,7 +42,7 @@ const Footer = () => (
       </Row>
       <Row className="justify-content-center">
         <Col md={6} className="text-center">
-          <span>© 2024 Bluelry. Tous droits réservés.</span>
+          <span>© 2025 Bluelry. Tous droits réservés.</span>
         </Col>
       </Row>
     </Container>
